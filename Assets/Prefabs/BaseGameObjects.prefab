@@ -546,7 +546,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetDontDestroy: 0
   UI: {fileID: 839656118875269943}
+  PlayerSpawnPos: {fileID: 0}
+  PlayerPrefab: {fileID: 794928170009684246, guid: 704eacdc93c51bd45b1b361cd91a18c1, type: 3}
   StartGameOnStart: 1
+  PickUpTimerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 180
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TimeBeforeFirstPickUp: 2
+  PickupMinimumTime: 5
+  PickupMaximumTime: 8
+  MaximumPickUps: 0
 --- !u!1 &7901691324974746829
 GameObject:
   m_ObjectHideFlags: 0
