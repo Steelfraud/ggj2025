@@ -31,6 +31,11 @@ public class GameManager : Singleton<GameManager>
             GameEnd();
         }
 
+        if (false) //check for player count
+        {
+            GameEnd();
+        }
+
         if (gameOngoing)
         {
             gameTimer += Time.deltaTime;
