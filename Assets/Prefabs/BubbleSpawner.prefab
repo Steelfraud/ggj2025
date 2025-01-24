@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefabs:
   - {fileID: 7012056946386735580, guid: eb5a6da1f34d8e341b13bb05accef18b, type: 3}
+  - {fileID: 6560509933650798598, guid: 8d647a7dd6b559945a593d744ab6895d, type: 3}
   dispersion: 10
   delayBetweenWaves: 3
   spawnAmount: 10

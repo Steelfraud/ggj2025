@@ -28,7 +28,7 @@ public class BubbleBase : MonoBehaviour
             Debug.Log("collision");
             Vector3 direction = other.transform.position - transform.position;
             float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
-            other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction);
+            other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction, ForceMode.VelocityChange);
             Destroy(gameObject);
         }
     }
