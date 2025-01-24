@@ -23,9 +23,14 @@ public class BubbleBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Vector3 direction = other.transform.position - transform.position;
-
-        other.collider.GetComponent<Rigidbody>().AddForce(force * direction);
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("collision");
+            Vector3 direction = other.transform.position - transform.position;
+            float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
+            other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction);
+            Destroy(gameObject);
+        }
     }
 
     private void OnBecameInvisible()
@@ -42,8 +47,7 @@ public class BubbleBase : MonoBehaviour
 
         if (!GetComponent<MeshRenderer>().isVisible)
         {
-            Destroy(this);
-            Debug.Log("bubble destroyed");
+            Destroy(gameObject);
         }
     }
 }

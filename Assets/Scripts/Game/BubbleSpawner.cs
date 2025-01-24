@@ -33,7 +33,7 @@ public class BubbleSpawner : MonoBehaviour
     {
         for (int i = 1; i < amount; i++)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-dispersion, dispersion), 0, Random.Range(-dispersion,dispersion));
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-dispersion, dispersion), 0.5f, Random.Range(-dispersion,dispersion));
             Instantiate(bubblePrefabs.GetRandomElementFromList(), spawnPosition, Quaternion.identity);
 
         }
