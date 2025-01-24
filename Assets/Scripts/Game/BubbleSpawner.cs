@@ -9,13 +9,14 @@ public class BubbleSpawner : MonoBehaviour
     private List<BubbleBase> bubblePrefabs = new();
 
     [SerializeField]
-    private float dispersion = 10f;
+    private float spawnRangeX = 10f;
 
     [SerializeField]
-    private float delayBetweenWaves = 3f;
+    private float spawnRangeZ = 10f;
 
-    [SerializeField]
-    private int spawnAmount = 10;
+    public float DelayBetweenWaves = 3f;
+
+    public int SpawnAmount = 10;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,25 +24,19 @@ public class BubbleSpawner : MonoBehaviour
         StartCoroutine(StartSpawner());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void SpawnBubbles(int amount)
     {
         for (int i = 1; i < amount; i++)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-dispersion, dispersion), 0.5f, Random.Range(-dispersion,dispersion));
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.5f, Random.Range(-spawnRangeZ, spawnRangeZ));
             Instantiate(bubblePrefabs.GetRandomElementFromList(), spawnPosition, transform.rotation);
         }
     }
 
     IEnumerator StartSpawner()
     {
-        yield return new WaitForSeconds(delayBetweenWaves);
-        SpawnBubbles(spawnAmount);
+        yield return new WaitForSeconds(DelayBetweenWaves);
+        SpawnBubbles(SpawnAmount);
         StartCoroutine(StartSpawner());
     }
 }
