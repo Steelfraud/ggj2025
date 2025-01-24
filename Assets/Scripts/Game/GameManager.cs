@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public GameUI UI;
+    public BubbleSpawner Spawner;
     public Transform PlayerSpawnPos;
     public GameObject PlayerPrefab;
 
@@ -114,6 +115,11 @@ public class GameManager : Singleton<GameManager>
     {
         gameOngoing = false;
         UI.ToggleGameEndPanel(true);
+
+        if (Spawner != null)
+        {
+            Spawner.enabled = false;
+        }
     }
 
     private void CreatePickUp()
