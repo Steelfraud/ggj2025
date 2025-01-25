@@ -26,6 +26,11 @@ public class PlayerPanel : MonoBehaviour
     {
         if (linkedAvatar != null)
         {
+            int numberToShow = Mathf.RoundToInt((linkedAvatar.PushMultiplier - 1) * 100);
+            PlayerDamageLabel.text = numberToShow + "%";
+        }
+        else
+        {
             PlayerDamageLabel.text = "0%";
         }
     }
