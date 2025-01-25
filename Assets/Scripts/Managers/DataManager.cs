@@ -46,6 +46,7 @@ public class PlayerVisualInfo
     public Material PlayerMaterial;
     public Color PlayerColor;
     public GameObject PlayerModel;
+    public Sprite PlayerPortrait;
     internal int PlayerIndex;
     internal int PlayerWins = 0;
 }

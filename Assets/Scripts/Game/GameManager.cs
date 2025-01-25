@@ -218,7 +218,7 @@ public class GameManager : Singleton<GameManager>
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
 
-        UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar);
+        UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar, colorToSet.PlayerPortrait);
     }
 
 }

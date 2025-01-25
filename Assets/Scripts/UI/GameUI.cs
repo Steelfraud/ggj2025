@@ -62,11 +62,11 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
     }
 
-    public void AddNewPlayerUI(string playerName, PlayerAvatar avatar)
+    public void AddNewPlayerUI(string playerName, PlayerAvatar avatar, Sprite portrait)
     {
         PlayerPanel panel = AvailablePlayerPanels.Find(x => x.isActiveAndEnabled == false);
         panel.gameObject.SetActive(true);
-        panel.SetPlayerInfo(playerName, avatar);
+        panel.SetPlayerInfo(playerName, avatar, portrait);
     }
 
 }

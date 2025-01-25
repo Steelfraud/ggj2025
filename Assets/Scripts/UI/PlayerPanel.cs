@@ -12,12 +12,13 @@ public class PlayerPanel : MonoBehaviour
 
     private PlayerAvatar linkedAvatar;
 
-    public void SetPlayerInfo(string playerName, PlayerAvatar playerAvatar)
+    public void SetPlayerInfo(string playerName, PlayerAvatar playerAvatar, Sprite portrait)
     {
         PlayerNameLabel.text = playerName;
         //PlayerNameLabel.color = playerAvatar.MyColor.PlayerColor;
 
         PlayerBorder.color = playerAvatar.MyColor.PlayerColor;
+        PlayerPortrait.sprite = portrait;
 
         linkedAvatar = playerAvatar;
     }
