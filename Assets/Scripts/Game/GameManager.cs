@@ -191,7 +191,7 @@ public class GameManager : Singleton<GameManager>
 
         pickUpScript.SetupPickup(randomPickUp);
 
-        CustomCamera.Instance.AddToTargetGroup(newPickUp.transform, 0.25f);
+        CustomCamera.Instance.AddPickupToTargetGroup(newPickUp.transform);
     }
 
     public void OnPlayerJoined(PlayerInput input)
