@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Speed Pick Up
   m_EditorClassIdentifier: 
   Active: 1
-  PickupWeight: 5
+  PickupWeight: 1
   PickupPrefab: {fileID: 0}
   PooledPrefabData: {fileID: 11400000, guid: bd1e6295fc2c7314ba20e4d4c8211be8, type: 2}
   ModifiersToApply:

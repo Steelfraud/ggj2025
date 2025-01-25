@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd5012851f50af4a861d0828e5ae9e3, type: 3}
-  m_Name: Ultimate_PickUp_Poolable
+  m_Name: Rocket_PickUp_Poolable
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3769421464357761239, guid: b5fbac1e517643049b32bd3c05005fb0, type: 3}
+  prefab: {fileID: 3769421464357761239, guid: 22c43e4c74fb3c8488d8465ec52282be, type: 3}
   objectsToPreSpawn: 3
   instantiateNewObjectsWhenNeeded: 1
   keepObjectsAliveThroughSceneChanges: 0
   returnObjectsToPoolOnSceneChangeCall: 1
   groupIdentifiers: []
-  logNotBeingUsed: 0
-  logOveruseAndSpawning: 0
+  logNotBeingUsed: 1
+  logOveruseAndSpawning: 1

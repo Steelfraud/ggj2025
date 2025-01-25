@@ -1,6 +1,9 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CustomCamera : Singleton<CustomCamera>
@@ -18,6 +21,10 @@ public class CustomCamera : Singleton<CustomCamera>
     }
 
     public CinemachineTargetGroup targetGroup;
+    [SerializeField]
+    private CinemachineTargetGroup hitTargetGroup;
+    private CinemachineGroupFraming groupFraming;
+    private CinemachineCamera cinemachineCamera;
     private GameObject worldCenterObject;
     public List<PickupTarget> pickUpList = new List<PickupTarget>();
 
@@ -30,9 +37,12 @@ public class CustomCamera : Singleton<CustomCamera>
     [SerializeField]
     private float pickupWeightReductionSpeed = .1f;
 
+
     public void Start()
     {
         CreateSingleton(this, SetDontDestroy);
+        groupFraming = GetComponentInChildren<CinemachineGroupFraming>();
+        cinemachineCamera = GetComponentInChildren<CinemachineCamera>();
         worldCenterObject = new GameObject();
         worldCenterObject.transform.parent = transform;
         AddToTargetGroup(worldCenterObject.transform, worldCenterWeight);
@@ -40,7 +50,28 @@ public class CustomCamera : Singleton<CustomCamera>
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.X)) 
+        {
+            StartCoroutine(FocusOnHit());
+        }
+
         ReducePickupWeights();
+    }
+
+    private IEnumerator FocusOnHit()
+    {
+        // Stoppaa peli ?
+        var oldDamping = groupFraming.Damping;
+        groupFraming.Damping = 0f;
+        cinemachineCamera.Target.TrackingTarget = hitTargetGroup.Transform;
+        // Focus camera on hit - ignore other targets
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(1);
+        groupFraming.Damping = oldDamping;
+        cinemachineCamera.Target.TrackingTarget = targetGroup.Transform;
+        // Continue game
+        Time.timeScale = 1f;
+        // Get back to main stuff
     }
 
     public void AddToTargetGroup(Transform t, float weigth = 1)

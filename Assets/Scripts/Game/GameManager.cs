@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     {
         public Material PlayerMaterial;
         public Color PlayerColor;
+        public int PlayerIndex;
     }
 
     [Header("References")]
@@ -44,6 +45,11 @@ public class GameManager : Singleton<GameManager>
     private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
     private static Dictionary<int, PlayerColors> playerColors = new Dictionary<int, PlayerColors>();
+
+    private void Awake()
+    {
+        GameData.LoadDataFiles();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -151,7 +157,19 @@ public class GameManager : Singleton<GameManager>
     private void GameEnd()
     {
         gameOngoing = false;
-        UI.ToggleGameEndPanel(true);
+
+        string winnerText = "";
+
+        if (activePlayers.Count == 1)
+        {
+            winnerText = "Winner:\nPlayer " + activePlayers[0].MyColor.PlayerIndex;
+        }
+        else
+        {
+            winnerText = "Survived for:\n" + Mathf.RoundToInt(gameTimer) + " seconds";
+        }
+
+        UI.ShowGameEnd(winnerText);
         PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
 
         if (Spawner != null)
@@ -225,10 +243,13 @@ public class GameManager : Singleton<GameManager>
             availableColors.RemoveAll(x => playerColors.ContainsValue(x));
             colorToSet = availableColors.GetRandomElementFromList();
             playerColors.Add(input.devices[0].deviceId, colorToSet);
+            colorToSet.PlayerIndex = playerColors.Count;
         }
 
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
+
+        UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar);
     }
 
 }

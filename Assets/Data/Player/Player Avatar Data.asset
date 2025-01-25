@@ -12,7 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a266e131eb43743b9c22976a841e2c, type: 3}
   m_Name: Player Avatar Data
   m_EditorClassIdentifier: 
-  PlayerPhysicsMaterial: {fileID: 13400000, guid: 641b0bc149fde744c95999ab1ba4801b, type: 2}
+  AddedDamageMultiplierAtCollisionVelocity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.13333334
+      outSlope: 0.13333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 0.4
+      inSlope: 0.13333334
+      outSlope: 0.13333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DamageCooldown: 0.2
   MoveMaxAngularVelocity: 20
   DashMaxAngularVelocity: 70
   MovementType: 1
@@ -110,3 +134,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   DashDuration: 0.5
   DashCooldown: 0
+  DashPushForceMultiplier: 0.3

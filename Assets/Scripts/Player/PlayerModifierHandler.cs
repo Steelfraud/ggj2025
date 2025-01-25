@@ -13,11 +13,18 @@ public class PlayerModifierHandler : MonoBehaviour
         float value = 0f;
 
         //IEnumerable<BasicModifierSource> modifiers = activeModifiers.OrderBy(x => x.ModifierPriority);
-        //List<BasicModifierSource> modifiers = activeModifiers.OrderBy(x => x.ModifierPriority).ToList();
+        List<BasicModifierSource> modifiers = activeModifiers.OrderByDescending(x => x.ModifierPriority()).ToList();
         
-        foreach (BasicModifierSource modifier in activeModifiers)
+        foreach (BasicModifierSource modifier in modifiers)
         {
-            value += modifier.GetModifierValue(valueToGet);
+            if (modifier.ModificationType == ModificationType.Multiplier)
+            {
+                value = modifier.GetMultiplierModifierValue(valueToGet, value);
+            }
+            else
+            {
+                value += modifier.GetModifierValue(valueToGet);
+            }            
         }
 
         return value;
@@ -50,7 +57,7 @@ public class PlayerModifierHandler : MonoBehaviour
     public void RemoveModifier(BasicModifierSource modifier)
     {
         activeModifiers.Remove(modifier);
-        Debug.Log("Removed new modifier!");
+        Debug.Log("Removed modifier!");
     }
 
 }

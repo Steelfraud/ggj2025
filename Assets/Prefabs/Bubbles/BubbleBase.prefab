@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 3
+  addedPushMultiplier: 0.1
   initialMoveForce: 2
 --- !u!54 &1006834805743837287
 Rigidbody:

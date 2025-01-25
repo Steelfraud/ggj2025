@@ -8,22 +8,35 @@ public class BubbleBase : MonoBehaviour
     [SerializeField]
     private float force = 1000f;
 
+    [SerializeField, Min(0f)]
+    private float addedPushMultiplier = 0.2f;
+
     private float destroyAfterSeconds = 5;
     public float initialMoveForce = 3f;
+    private Rigidbody rb;
+    private Collider bubbleCollider;
+    private Animator bubbleAnimator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
-        GetComponent<Rigidbody>().AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            bubbleCollider = GetComponent<Collider>();
+            bubbleAnimator = GetComponentInChildren<Animator>();
+        }
+
+        rb.AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
+        bubbleCollider.enabled = true;
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<PlayerAvatar>().ultimateFormEnabled)
+        if (other.gameObject.tag == "Player" && other.gameObject.TryGetComponent(out PlayerAvatar playerAvatar) && !playerAvatar.ultimateFormEnabled)
         {
             Vector3 direction = other.transform.position - transform.position;
-            float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
-            other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction, ForceMode.VelocityChange);
+            float newForce = playerAvatar.PlayerRigidbody.linearVelocity.magnitude + force;
+            playerAvatar.Push(transform, newForce * direction, addedPushMultiplier);
 
             StartCoroutine(DestroyBubble());
         }
@@ -50,9 +63,9 @@ public class BubbleBase : MonoBehaviour
 
     public IEnumerator DestroyBubble()
     {
-        Animator animator = GetComponentInChildren<Animator>();
-        animator.SetBool("BubbleWasHit", true);
-        yield return new WaitForSeconds(animator.GetCurrentAnimationLength() - 0.1f);
+        bubbleCollider.enabled = false;
+        bubbleAnimator.SetBool("BubbleWasHit", true);
+        yield return new WaitForSeconds(bubbleAnimator.GetCurrentAnimationLength() - 0.1f);
         PoolManager.ReturnObjectToPoolOrDestroyIt(gameObject);
         //Destroy(gameObject);
     }
