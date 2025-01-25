@@ -552,6 +552,11 @@ MonoBehaviour:
   PlayerSpawnPos: {fileID: 0}
   PlayerInputManager: {fileID: 5197649503318429000}
   TargetGroup: {fileID: 6168536881376746674}
+  PlayerSpawnPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   StartGameOnStart: 1
   PickUpTimerCurve:
     serializedVersion: 2
@@ -577,10 +582,21 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  TimeBeforeFirstPickUp: 2
-  PickupMinimumTime: 5
-  PickupMaximumTime: 8
+  TimeBeforeFirstPickUp: 10
+  PickupMinimumTime: 10
+  PickupMaximumTime: 15
   MaximumPickUps: 0
+  AvailableColors:
+  - PlayerMaterial: {fileID: 2100000, guid: 6c533cce82595914e86d63da32ed4e02, type: 2}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  - PlayerMaterial: {fileID: 2100000, guid: fc5f2926d963d6d49944a6eea553f74b, type: 2}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  - PlayerMaterial: {fileID: 2100000, guid: 86039e1e92a24fe48bdb00d841e491c9, type: 2}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  - PlayerMaterial: {fileID: 2100000, guid: dd2678091f5772a4bba1a306e76ed9e4, type: 2}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  - PlayerMaterial: {fileID: 2100000, guid: 4e519d6b8d6bf8142ba0fd45a49d1545, type: 2}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &5197649503318429000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1588,22 +1588,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 341191933}
     - target: {fileID: 108878533704458521, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: PickupMaximumTime
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 108878533704458521, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: PickupMinimumTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 108878533704458521, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: TimeBeforeFirstPickUp
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 108878533704458521, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: PlayerSpawnPositions.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 108878533704458521, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: 'PlayerSpawnPositions.Array.data[0]'
       value: 
       objectReference: {fileID: 169880701}

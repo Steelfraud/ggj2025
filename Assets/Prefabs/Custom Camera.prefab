@@ -155,7 +155,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
+  UpdateMethod: 0
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
@@ -179,6 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 180178953258076823}
+  - component: {fileID: 8083269024426273695}
   m_Layer: 0
   m_Name: Custom Camera
   m_TagString: Untagged
@@ -204,6 +205,20 @@ Transform:
   - {fileID: 4667876139273240157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8083269024426273695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972208244176383897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4227a62c1b0f2b4caccaead08b5b744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetDontDestroy: 0
+  targetGroup: {fileID: 6292684478432513725}
 --- !u!1 &8507902001503644855
 GameObject:
   m_ObjectHideFlags: 0

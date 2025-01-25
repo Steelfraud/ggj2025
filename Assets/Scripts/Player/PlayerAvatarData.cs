@@ -9,8 +9,8 @@ namespace PlayerController
         Both
     }
 
-    [CreateAssetMenu(fileName = "New Player Data", menuName = "Player Controller/Player Data")]
-    public class PlayerData : ScriptableObject
+    [CreateAssetMenu(fileName = "New Player Avatar Data", menuName = "Player Controller/Player Avatar Data")]
+    public class PlayerAvatarData : ScriptableObject
     {
         [Header("References")]
         public PhysicsMaterial PlayerPhysicsMaterial;

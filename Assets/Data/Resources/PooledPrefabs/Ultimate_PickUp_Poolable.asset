@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd5012851f50af4a861d0828e5ae9e3, type: 3}
+  m_Name: Ultimate_PickUp_Poolable
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3769421464357761239, guid: b5fbac1e517643049b32bd3c05005fb0, type: 3}
+  objectsToPreSpawn: 0
+  instantiateNewObjectsWhenNeeded: 1
+  keepObjectsAliveThroughSceneChanges: 0
+  returnObjectsToPoolOnSceneChangeCall: 1
+  groupIdentifiers: []
+  logNotBeingUsed: 1
+  logOveruseAndSpawning: 1

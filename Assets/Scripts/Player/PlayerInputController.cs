@@ -46,7 +46,7 @@ namespace PlayerController
             
             if (TryConvertInputToCameraSpace(inputVector, out Vector3 directionInWord))
             {
-                player.Move(directionInWord);
+                player.SpawnedAvatar.Move(directionInWord);
             }
         }
 
@@ -56,11 +56,11 @@ namespace PlayerController
 
             if (inputPressed > 0)
             {
-                player.StartDash();
+                player.SpawnedAvatar.StartDash();
             }
             else
             {
-                player.ReleaseDash();
+                player.SpawnedAvatar.ReleaseDash();
             }
         }
 
