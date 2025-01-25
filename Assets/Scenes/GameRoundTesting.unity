@@ -2295,10 +2295,6 @@ PrefabInstance:
       propertyPath: 'PlayerSpawnPositions.Array.data[3]'
       value: 
       objectReference: {fileID: 2095120968}
-    - target: {fileID: 724866210235374569, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
     - target: {fileID: 741226113076410525, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2347,18 +2343,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -28.217842
       objectReference: {fileID: 0}
-    - target: {fileID: 2935181064591174617, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4004036894259285260, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4547399097659991201, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
     - target: {fileID: 4758246739711487058, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38.861748
@@ -2383,10 +2367,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -27.217842
       objectReference: {fileID: 0}
-    - target: {fileID: 6596958073940968658, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
     - target: {fileID: 6772158374378594723, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_Name
       value: BaseGameObjects
@@ -2395,21 +2375,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6774244242057520986, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
     - target: {fileID: 8278349441481996688, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: pushCameraEffectLimit
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8340729278305800128, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 8466283277082932386, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
-      propertyPath: m_fontSize
-      value: 27.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
