@@ -2,6 +2,7 @@
 using PlayerController;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     public BubbleSpawner Spawner;
     public Transform PlayerSpawnPos;
     public PlayerInputManager PlayerInputManager;
+    public CinemachineTargetGroup TargetGroup;
 
     [Header("Game Settings")]
     public bool StartGameOnStart = true;
@@ -88,6 +90,7 @@ public class GameManager : Singleton<GameManager>
     {
         activePlayers.Remove(player);
         Destroy(player.gameObject);
+        TargetGroup.RemoveMember(player.transform);
 
         if ((highestPlayerCount > 1 && activePlayers.Count == 1) || activePlayers.Count == 0)
         {
@@ -173,6 +176,7 @@ public class GameManager : Singleton<GameManager>
         Player newPlayer = input.gameObject.GetComponent<Player>();
         activePlayers.Add(newPlayer);
         highestPlayerCount++;
+        TargetGroup.AddMember(input.transform, 1, 1);
     }
 
 }
