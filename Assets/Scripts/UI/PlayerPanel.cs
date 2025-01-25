@@ -24,7 +24,7 @@ public class PlayerPanel : MonoBehaviour
 
     public void Update()
     {
-        if (linkedAvatar != null)
+        if (linkedAvatar != null && linkedAvatar.isActiveAndEnabled)
         {
             int numberToShow = Mathf.RoundToInt((linkedAvatar.PushMultiplier - 1) * 100);
             PlayerDamageLabel.text = numberToShow + "%";

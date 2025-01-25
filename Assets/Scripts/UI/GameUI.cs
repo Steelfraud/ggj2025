@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI TimerLabel;
     public GameObject GameEndPanelParent;
     public TextMeshProUGUI WinnerText;
+    public FloatingTextHandler TextHandler;
 
     public List<PlayerPanel> AvailablePlayerPanels;
 
@@ -46,6 +47,13 @@ public class GameUI : MonoBehaviour
     public void ToggleGameEndPanel(bool setTo)
     {
         GameEndPanelParent.SetActive(setTo);
+    }
+
+    public void AddNewFloatingText(string text, Color textColor, Vector3 position)
+    {
+        TextHandler.AddNewTextToQueue(new FloatingTextData() { positionToSet = position, textColor = textColor, 
+            textToSet = text, timeToStayActiveFor = 3f, textMovementPerSecond = new Vector3(0, 1, 0) });
+        Debug.Log("added new text: " + text);
     }
 
     public void RestartLevel()

@@ -1,3 +1,4 @@
+using PlayerController;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,12 +60,12 @@ public class CustomCamera : Singleton<CustomCamera>
         worldCenterObject = new GameObject();
         worldCenterObject.transform.parent = transform;
         AddToTargetGroup(worldCenterObject.transform, worldCenterWeight);
-        PlayerController.PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
     }
 
     public void OnDestroy()
     {
-        PlayerController.PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
     }
 
     private void OnPlayerPush(Transform pushed, Transform pusher, Vector3 pushForce)
@@ -75,7 +76,11 @@ public class CustomCamera : Singleton<CustomCamera>
         }
         canPushCameraEffect = false;
         hitTargetGroup.AddMember(pushed, 1, 1);
-        hitTargetGroup.AddMember(pusher, 1, 1);
+
+        if (pusher.GetComponentInChildren<PlayerAvatar>())
+        {
+            hitTargetGroup.AddMember(pusher, 1, 1);
+        }
         StartCoroutine(FocusOnHit());
     }
 

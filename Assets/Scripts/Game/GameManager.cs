@@ -36,7 +36,6 @@ public class GameManager : Singleton<GameManager>
     public List<PlayerAvatar> activePlayers = new List<PlayerAvatar>();
     private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
-    private static Dictionary<int, PlayerVisualInfo> playerColors = new Dictionary<int, PlayerVisualInfo>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,15 +49,9 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F8)) //debug keybinds
-        {
-            GameEnd();
-        }
-
         if (gameOngoing)
         {
             gameTimer += Time.deltaTime;
-
             timeTillNextPickup -= Time.deltaTime;
 
             if (timeTillNextPickup < 0f)
@@ -98,7 +91,8 @@ public class GameManager : Singleton<GameManager>
 
         if ((highestPlayerCount > 1 && activePlayers.Count == 1) || activePlayers.Count == 0)
         {
-            GameEnd();
+            if (gameOngoing)
+                GameEnd();
         }
     }
 
@@ -150,6 +144,7 @@ public class GameManager : Singleton<GameManager>
         if (activePlayers.Count == 1)
         {
             winnerText = "Winner:\nPlayer " + activePlayers[0].MyColor.PlayerIndex;
+            activePlayers[0].MyColor.PlayerWins++;
         }
         else
         {
