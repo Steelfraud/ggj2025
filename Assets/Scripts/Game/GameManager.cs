@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public Transform PlayerSpawnPos;
     public PlayerInputManager PlayerInputManager;
     public CinemachineTargetGroup TargetGroup;
+    public List<Transform> PlayerSpawnPositions;
 
     [Header("Game Settings")]
     public bool StartGameOnStart = true;
@@ -33,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     private List<PickUpSpawnPosition> pickUpSpawns = new List<PickUpSpawnPosition>(); 
     private List<PlayerPickUpObjectBase> activePickUps = new List<PlayerPickUpObjectBase>();
     private List<Player> activePlayers = new List<Player>();
+    private List<Transform> usedSpawnPositions = new List<Transform>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,6 +86,8 @@ public class GameManager : Singleton<GameManager>
         {
             spawn.ActivePickUp = null;
         }
+
+        TargetGroup.RemoveMember(pickUp.transform);
     }
 
     public void KillPlayer(Player player)
@@ -113,6 +117,8 @@ public class GameManager : Singleton<GameManager>
             timeTillNextPickup = Random.Range(PickupMinimumTime, PickupMaximumTime);
         }        
 
+        usedSpawnPositions.Clear();
+
         highestPlayerCount = 0;
         int playerIndex = 0;
 
@@ -134,6 +140,7 @@ public class GameManager : Singleton<GameManager>
     {
         gameOngoing = false;
         UI.ToggleGameEndPanel(true);
+        PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
 
         if (Spawner != null)
         {
@@ -169,6 +176,8 @@ public class GameManager : Singleton<GameManager>
         activePickUps.Add(pickUpScript);
         randomSpawnPos.ActivePickUp = pickUpScript;
         newPickUp.transform.position = randomSpawnPos.transform.position;
+
+        TargetGroup.AddMember(newPickUp.transform, 0.25f, 0.5f);
     }
 
     public void OnPlayerJoined(PlayerInput input)
@@ -177,6 +186,20 @@ public class GameManager : Singleton<GameManager>
         activePlayers.Add(newPlayer);
         highestPlayerCount++;
         TargetGroup.AddMember(input.transform, 1, 1);
+
+        List<Transform> possibleSpawns = new List<Transform>(PlayerSpawnPositions);
+        possibleSpawns.RemoveAll(x => usedSpawnPositions.Contains(x));
+
+        if (possibleSpawns.Count == 0)
+        {
+            usedSpawnPositions.Clear();
+            possibleSpawns = new List<Transform>(PlayerSpawnPositions);
+        }
+
+        Transform spawnPos = possibleSpawns.GetRandomElementFromList();
+        usedSpawnPositions.Add(spawnPos);
+
+        newPlayer.transform.position = spawnPos.transform.position;
     }
 
 }
