@@ -43,7 +43,7 @@ public class GameManager : Singleton<GameManager>
     public List<PlayerAvatar> activePlayers = new List<PlayerAvatar>();
     private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
-    private List<PlayerColors> usedColors = new List<PlayerColors>();
+    private static Dictionary<int, PlayerColors> playerColors = new Dictionary<int, PlayerColors>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -130,7 +130,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         usedSpawnPositions.Clear();
-        usedColors.Clear();
 
         highestPlayerCount = 0;
         //int playerIndex = 0;
@@ -214,16 +213,21 @@ public class GameManager : Singleton<GameManager>
         Transform spawnPos = possibleSpawns.GetRandomElementFromList();
         usedSpawnPositions.Add(spawnPos);
 
-        //newPlayer.transform.position = spawnPos.transform.position;
+        PlayerColors colorToSet = null;        
 
-        List<PlayerColors> availableColors = new List<PlayerColors>(AvailableColors);
-        availableColors.RemoveAll(x => usedColors.Contains(x));
-        PlayerColors colorToSet = availableColors.GetRandomElementFromList();
-        usedColors.Add(colorToSet);
+        if (playerColors.ContainsKey(input.devices[0].deviceId))
+        {
+            colorToSet = playerColors[input.devices[0].deviceId];
+        }
+        else
+        {
+            List<PlayerColors> availableColors = new List<PlayerColors>(AvailableColors);
+            availableColors.RemoveAll(x => playerColors.ContainsValue(x));
+            colorToSet = availableColors.GetRandomElementFromList();
+            playerColors.Add(input.devices[0].deviceId, colorToSet);
+        }
 
-        //newPlayer.SetPlayerColor(colorToSet);
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
-
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
     }
 
