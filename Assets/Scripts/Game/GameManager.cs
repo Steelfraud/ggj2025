@@ -86,6 +86,8 @@ public class GameManager : Singleton<GameManager>
         {
             spawn.ActivePickUp = null;
         }
+
+        TargetGroup.RemoveMember(pickUp.transform);
     }
 
     public void KillPlayer(Player player)
@@ -174,6 +176,8 @@ public class GameManager : Singleton<GameManager>
         activePickUps.Add(pickUpScript);
         randomSpawnPos.ActivePickUp = pickUpScript;
         newPickUp.transform.position = randomSpawnPos.transform.position;
+
+        TargetGroup.AddMember(newPickUp.transform, 0.25f, 0.5f);
     }
 
     public void OnPlayerJoined(PlayerInput input)

@@ -11,7 +11,7 @@ public class BubbleBase : MonoBehaviour
     public float initialMoveForce = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
         GetComponent<Rigidbody>().AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
     }
@@ -51,6 +51,7 @@ public class BubbleBase : MonoBehaviour
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetBool("BubbleWasHit", true);
         yield return new WaitForSeconds(animator.GetCurrentAnimationLength() - 0.1f);
-        Destroy(gameObject);
+        PoolManager.ReturnObjectToPoolOrDestroyIt(gameObject);
+        //Destroy(gameObject);
     }
 }
