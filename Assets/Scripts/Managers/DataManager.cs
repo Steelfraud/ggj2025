@@ -45,5 +45,6 @@ public class PlayerVisualInfo
 {
     public Material PlayerMaterial;
     public Color PlayerColor;
+    public GameObject PlayerModel;
     internal int PlayerIndex;
 }

@@ -22,6 +22,7 @@ namespace PlayerController
         [SerializeField] private MeshRenderer playerRenderer;
         [SerializeField] private ForceField forceField;
         [SerializeField] private PlayerVFXHandler vfxHandler;
+        [SerializeField] private Transform modelParent;
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody; public Rigidbody PlayerRigidbody { get { return playerRigidbody; } }
 
@@ -148,6 +149,8 @@ namespace PlayerController
         {
             MyColor = color;
             playerRenderer.material = color.PlayerMaterial;
+            GameObject playerModel = Instantiate(color.PlayerModel, modelParent);
+            playerModel.transform.localPosition = Vector3.zero;
         }
 
         public void Move(Vector3 moveDirection)
