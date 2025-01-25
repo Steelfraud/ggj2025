@@ -2,7 +2,9 @@
 using PlayerController;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -10,7 +12,8 @@ public class GameManager : Singleton<GameManager>
     public GameUI UI;
     public BubbleSpawner Spawner;
     public Transform PlayerSpawnPos;
-    public GameObject PlayerPrefab;
+    public PlayerInputManager PlayerInputManager;
+    public CinemachineTargetGroup TargetGroup;
 
     [Header("Game Settings")]
     public bool StartGameOnStart = true;
@@ -26,9 +29,10 @@ public class GameManager : Singleton<GameManager>
     private float gameTimer = 0;
     private float timeTillNextPickup = 0f;
     private bool gameOngoing = false;
+    private int highestPlayerCount = 0;
     private List<PickUpSpawnPosition> pickUpSpawns = new List<PickUpSpawnPosition>(); 
     private List<PlayerPickUpObjectBase> activePickUps = new List<PlayerPickUpObjectBase>();
-    private Player activePlayer;
+    private List<Player> activePlayers = new List<Player>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,11 +50,6 @@ public class GameManager : Singleton<GameManager>
         {
             GameEnd();
         }
-
-        //if (false) //check for player count
-        //{
-        //    GameEnd();
-        //}
 
         if (gameOngoing)
         {
@@ -89,8 +88,14 @@ public class GameManager : Singleton<GameManager>
 
     public void KillPlayer(Player player)
     {
+        activePlayers.Remove(player);
         Destroy(player.gameObject);
-        GameEnd();
+        TargetGroup.RemoveMember(player.transform);
+
+        if ((highestPlayerCount > 1 && activePlayers.Count == 1) || activePlayers.Count == 0)
+        {
+            GameEnd();
+        }
     }
 
     private void GameStart()
@@ -108,7 +113,21 @@ public class GameManager : Singleton<GameManager>
             timeTillNextPickup = Random.Range(PickupMinimumTime, PickupMaximumTime);
         }        
 
-        activePlayer = Instantiate(PlayerPrefab).GetComponent<Player>();
+        highestPlayerCount = 0;
+        int playerIndex = 0;
+
+        //foreach (InputDevice device in InputSystem.devices) 
+        //{
+        //    if (device.name.Contains("Mouse")) // this is called a lazy hack
+        //    {
+        //        continue;
+        //    }
+
+        //    PlayerInputManager.JoinPlayer(playerIndex++, pairWithDevice: device);
+        //    Debug.Log("device name: " + device.description);
+        //}
+
+        PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;        
     }
 
     private void GameEnd()
@@ -150,6 +169,14 @@ public class GameManager : Singleton<GameManager>
         activePickUps.Add(pickUpScript);
         randomSpawnPos.ActivePickUp = pickUpScript;
         newPickUp.transform.position = randomSpawnPos.transform.position;
+    }
+
+    public void OnPlayerJoined(PlayerInput input)
+    {
+        Player newPlayer = input.gameObject.GetComponent<Player>();
+        activePlayers.Add(newPlayer);
+        highestPlayerCount++;
+        TargetGroup.AddMember(input.transform, 1, 1);
     }
 
 }
