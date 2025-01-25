@@ -300,7 +300,7 @@ MonoBehaviour:
   worldCenterWeight: 0.3
   pickupWeightReductionSpeed: 0.2
   pushCameraEffectLimit: 50
-  pushCameraEffectCooldown: 1
+  pushCameraEffectCooldown: 3
 --- !u!1 &8507902001503644855
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FramingMode: 2
-  FramingSize: 0.33
+  FramingSize: 0.5
   CenterOffset: {x: 0, y: 0}
   Damping: 5
   SizeAdjustment: 1

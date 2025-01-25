@@ -48,14 +48,19 @@ MonoBehaviour:
   AvailableColors:
   - PlayerMaterial: {fileID: 2100000, guid: 6c533cce82595914e86d63da32ed4e02, type: 2}
     PlayerColor: {r: 0.4862745, g: 0.39607844, b: 0.5647059, a: 1}
+    PlayerModel: {fileID: 919132149155446097, guid: 73d2915b11889e74cb66755d897798cf, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: fc5f2926d963d6d49944a6eea553f74b, type: 2}
     PlayerColor: {r: 0.28627452, g: 0.6, b: 0.5411765, a: 1}
+    PlayerModel: {fileID: 919132149155446097, guid: 15a7f974d757d9b48a56f31c50cb103a, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 86039e1e92a24fe48bdb00d841e491c9, type: 2}
     PlayerColor: {r: 0.40784314, g: 0.65882355, b: 0.31764707, a: 1}
+    PlayerModel: {fileID: 919132149155446097, guid: 04a3d165ec2cbaa44aa7c1eb451f67a1, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: dd2678091f5772a4bba1a306e76ed9e4, type: 2}
     PlayerColor: {r: 0.6784314, g: 0.4117647, b: 0.4, a: 1}
+    PlayerModel: {fileID: 919132149155446097, guid: 69684ed9d3943d84f9c95b91f699b852, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 4e519d6b8d6bf8142ba0fd45a49d1545, type: 2}
     PlayerColor: {r: 0.67058825, g: 0.64705884, b: 0.32156864, a: 1}
+    PlayerModel: {fileID: 919132149155446097, guid: 73d2915b11889e74cb66755d897798cf, type: 3}
 --- !u!1 &1303779278913225956
 GameObject:
   m_ObjectHideFlags: 0
