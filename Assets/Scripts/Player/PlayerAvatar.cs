@@ -138,7 +138,7 @@ namespace PlayerController
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
             pushMultiplier += addedPushMultiplier;
 
-            OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce);
+            OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
         }
 
         public void SetPlayerColor(GameManager.PlayerColors color)

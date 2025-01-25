@@ -37,6 +37,12 @@ public class CustomCamera : Singleton<CustomCamera>
     [SerializeField]
     private float pickupWeightReductionSpeed = .1f;
 
+    [SerializeField]
+    private float pushCameraEffectLimit = 30f;
+
+    [SerializeField]
+    private float pushCameraEffectCooldown = 1f;
+    private bool canPushCameraEffect = true;
 
     public void Start()
     {
@@ -46,15 +52,28 @@ public class CustomCamera : Singleton<CustomCamera>
         worldCenterObject = new GameObject();
         worldCenterObject.transform.parent = transform;
         AddToTargetGroup(worldCenterObject.transform, worldCenterWeight);
+        PlayerController.PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
+    }
+
+    public void OnDestroy()
+    {
+        PlayerController.PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
+    }
+
+    private void OnPlayerPush(Transform pushed, Transform pusher, Vector3 pushForce)
+    {
+        if (pushForce.magnitude < pushCameraEffectLimit)
+        {
+            return;
+        }
+        canPushCameraEffect = false;
+        hitTargetGroup.AddMember(pushed, 1, 1);
+        hitTargetGroup.AddMember(pusher, 1, 1);
+        StartCoroutine(FocusOnHit());
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X)) 
-        {
-            StartCoroutine(FocusOnHit());
-        }
-
         ReducePickupWeights();
     }
 
@@ -69,9 +88,12 @@ public class CustomCamera : Singleton<CustomCamera>
         yield return new WaitForSecondsRealtime(1);
         groupFraming.Damping = oldDamping;
         cinemachineCamera.Target.TrackingTarget = targetGroup.Transform;
+        hitTargetGroup.Targets.Clear();
         // Continue game
         Time.timeScale = 1f;
         // Get back to main stuff
+        yield return new WaitForSecondsRealtime(pushCameraEffectCooldown);
+        canPushCameraEffect = true;
     }
 
     public void AddToTargetGroup(Transform t, float weigth = 1)
@@ -80,7 +102,7 @@ public class CustomCamera : Singleton<CustomCamera>
         {
             return;
         }
-        targetGroup.AddMember(t, weigth, .5f);
+        targetGroup.AddMember(t, weigth, 4);
     }
 
     public void AddPickupToTargetGroup(Transform t)
