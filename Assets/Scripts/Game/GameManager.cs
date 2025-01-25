@@ -198,8 +198,7 @@ public class GameManager : Singleton<GameManager>
         Player newPlayer = input.gameObject.GetComponent<Player>();
         
         joinedPlayers.Add(newPlayer);
-        highestPlayerCount++;
-        CustomCamera.Instance.AddToTargetGroup(input.transform);
+        highestPlayerCount++;        
 
         List<Transform> possibleSpawns = new List<Transform>(PlayerSpawnPositions);
         possibleSpawns.RemoveAll(x => usedSpawnPositions.Contains(x));
@@ -221,7 +220,9 @@ public class GameManager : Singleton<GameManager>
         usedColors.Add(colorToSet);
 
         //newPlayer.SetPlayerColor(colorToSet);
-       activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
+        activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
+
+        CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
     }
 
 }
