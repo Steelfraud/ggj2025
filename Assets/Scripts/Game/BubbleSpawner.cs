@@ -46,8 +46,8 @@ public class BubbleSpawner : MonoBehaviour
 
     IEnumerator StartSpawner()
     {
-        yield return new WaitForSeconds(DelayBetweenWaves);
         SpawnBubbles(SpawnAmount);
+        yield return new WaitForSeconds(DelayBetweenWaves);
         StartCoroutine(StartSpawner());
     }
 }

@@ -101,7 +101,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionStrength: -2.34
+    - _EmissionStrength: -0.9
     - _EnvironmentReflections: 1
     - _FresnelPower: 1.03
     - _GlossMapScale: 0
@@ -127,8 +127,8 @@ Material:
     - _BaseColor: {r: 0.109050214, g: 0.2924528, b: 0, a: 1}
     - _Color: {r: 0.10905019, g: 0.29245278, b: 0, a: 1}
     - _EmissionColor: {r: 0.026720779, g: 0.11439361, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 0.71534777, b: 0, a: 1}
-    - _PatternScrollSpeed: {r: 0, g: -0.7, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 0.63447744, b: 0, a: 1}
+    - _PatternScrollSpeed: {r: 0.06, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
