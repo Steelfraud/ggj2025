@@ -8,14 +8,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
-    [System.Serializable]
-    public class PlayerColors
-    {
-        public Material PlayerMaterial;
-        public Color PlayerColor;
-        public int PlayerIndex;
-    }
-
+    
     [Header("References")]
     public GameUI UI;
     public BubbleSpawner Spawner;
@@ -30,7 +23,6 @@ public class GameManager : Singleton<GameManager>
     public float PickupMinimumTime = 1f;
     public float PickupMaximumTime = 10f;
     public int MaximumPickUps = 0;
-    public List<PlayerColors> AvailableColors;
 
     public bool GameGoing => gameOngoing;
     public float RoundTimer => gameTimer;
@@ -44,12 +36,7 @@ public class GameManager : Singleton<GameManager>
     public List<PlayerAvatar> activePlayers = new List<PlayerAvatar>();
     private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
-    private static Dictionary<int, PlayerColors> playerColors = new Dictionary<int, PlayerColors>();
-
-    private void Awake()
-    {
-        GameData.LoadDataFiles();
-    }
+    private static Dictionary<int, PlayerVisualInfo> playerColors = new Dictionary<int, PlayerVisualInfo>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -231,20 +218,7 @@ public class GameManager : Singleton<GameManager>
         Transform spawnPos = possibleSpawns.GetRandomElementFromList();
         usedSpawnPositions.Add(spawnPos);
 
-        PlayerColors colorToSet = null;        
-
-        if (playerColors.ContainsKey(input.devices[0].deviceId))
-        {
-            colorToSet = playerColors[input.devices[0].deviceId];
-        }
-        else
-        {
-            List<PlayerColors> availableColors = new List<PlayerColors>(AvailableColors);
-            availableColors.RemoveAll(x => playerColors.ContainsValue(x));
-            colorToSet = availableColors.GetRandomElementFromList();
-            playerColors.Add(input.devices[0].deviceId, colorToSet);
-            colorToSet.PlayerIndex = playerColors.Count;
-        }
+        PlayerVisualInfo colorToSet = DataManager.Instance.GetPlayerColor(input.devices[0].deviceId);
 
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);

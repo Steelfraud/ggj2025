@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd5012851f50af4a861d0828e5ae9e3, type: 3}
-  m_Name: Test_PickUp_Poolable
+  m_Name: Speed_PickUp_Poolable
   m_EditorClassIdentifier: 
   prefab: {fileID: 3769421464357761239, guid: dfe52ea7510a102488e8341e14004e9a, type: 3}
   objectsToPreSpawn: 3

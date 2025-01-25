@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &439210221220760468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6384164165797095631}
+  - component: {fileID: 2709591971658716271}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6384164165797095631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439210221220760468}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8270271235356665509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2709591971658716271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439210221220760468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93419b9695359ff428c2dbedfc8215cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetDontDestroy: 1
+  AvailableColors:
+  - PlayerMaterial: {fileID: 2100000, guid: 6c533cce82595914e86d63da32ed4e02, type: 2}
+    PlayerColor: {r: 0.4862745, g: 0.39607844, b: 0.5647059, a: 1}
+  - PlayerMaterial: {fileID: 2100000, guid: fc5f2926d963d6d49944a6eea553f74b, type: 2}
+    PlayerColor: {r: 0.28627452, g: 0.6, b: 0.5411765, a: 1}
+  - PlayerMaterial: {fileID: 2100000, guid: 86039e1e92a24fe48bdb00d841e491c9, type: 2}
+    PlayerColor: {r: 0.40784314, g: 0.65882355, b: 0.31764707, a: 1}
+  - PlayerMaterial: {fileID: 2100000, guid: dd2678091f5772a4bba1a306e76ed9e4, type: 2}
+    PlayerColor: {r: 0.6784314, g: 0.4117647, b: 0.4, a: 1}
+  - PlayerMaterial: {fileID: 2100000, guid: 4e519d6b8d6bf8142ba0fd45a49d1545, type: 2}
+    PlayerColor: {r: 0.67058825, g: 0.64705884, b: 0.32156864, a: 1}
 --- !u!1 &1303779278913225956
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +541,7 @@ Transform:
   m_Children:
   - {fileID: 1320221120861342974}
   - {fileID: 3535771302433402667}
+  - {fileID: 6384164165797095631}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7018262024242404628

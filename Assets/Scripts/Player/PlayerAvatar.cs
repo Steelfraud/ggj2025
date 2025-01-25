@@ -6,9 +6,10 @@ namespace PlayerController
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerAvatar : MonoBehaviour
     {
-        public GameManager.PlayerColors MyColor;
+        public PlayerVisualInfo MyColor;
 
         public PlayerModifierHandler PlayerModifierHandler => modifierHandler;
+        public PlayerVFXHandler PlayerVFXHandler => vfxHandler;
 
         [HideInInspector]
         public float UltimateForce;
@@ -19,6 +20,7 @@ namespace PlayerController
         [SerializeField] private PlayerAvatarData data;
         [SerializeField] private Collider playerCollider;
         [SerializeField] private MeshRenderer playerRenderer;
+        [SerializeField] private PlayerVFXHandler vfxHandler;
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody; public Rigidbody PlayerRigidbody { get { return playerRigidbody; } }
 
@@ -141,7 +143,7 @@ namespace PlayerController
             OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
         }
 
-        public void SetPlayerColor(GameManager.PlayerColors color)
+        public void SetPlayerColor(PlayerVisualInfo color)
         {
             MyColor = color;
             playerRenderer.material = color.PlayerMaterial;

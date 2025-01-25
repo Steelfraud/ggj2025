@@ -10,6 +10,8 @@ public class ModifierData
     public int ModifierPriority = 0;
     public float TimeToStay = 0f;
     public ModificationType ModificationType = ModificationType.Addition;
+    public PooledPrefabData ModifierPooledVFX;
+    public GameObject ModifierVFXPrefab;
 
     [Header("Value modifiers")]
     public bool AllowNegativeValues = true;
@@ -59,6 +61,8 @@ public class BasicModifierSource
     public bool TimedOut => TimeStayed >= baseData.TimeToStay;
     public bool IsTimedModifier => baseData.TimeToStay > 0f;
     public ModificationType ModificationType => baseData.ModificationType;
+    public bool HasVFX => baseData.ModifierPooledVFX != null || baseData.ModifierVFXPrefab != null;
+    public GameObject AttachedVFX;
 
     protected ModifierData baseData;
     protected float defaultMultiplier = 1f;
@@ -86,6 +90,21 @@ public class BasicModifierSource
     public float GetMultiplierModifierValue(ModifiedValueNumber valueToGet, float baseValue)
     {
         return this.baseData.GetModifierValue(valueToGet) * GetDefaultMultiplier();
+    }
+
+    public GameObject GetModifierVFX()
+    {
+        if (baseData.ModifierPooledVFX != null)
+        {
+            AttachedVFX = PoolManager.GetPooledObject(baseData.ModifierPooledVFX).gameObject;
+        }
+
+        if (baseData.ModifierVFXPrefab != null)
+        {
+            AttachedVFX = GameObject.Instantiate(baseData.ModifierVFXPrefab);
+        }
+
+        return AttachedVFX;
     }
 
     protected virtual float GetDefaultMultiplier()

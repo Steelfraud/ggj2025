@@ -1,4 +1,5 @@
 
+using PlayerController;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerModifierHandler : MonoBehaviour
 {
+    public PlayerAvatar MyAvatar;
+
     private List<BasicModifierSource> activeModifiers = new List<BasicModifierSource>();
 
     public float GetValueModifier(ModifiedValueNumber valueToGet)
@@ -52,12 +55,22 @@ public class PlayerModifierHandler : MonoBehaviour
     {
         activeModifiers.Add(modifier);
         Debug.Log("Added new modifier!");
+
+        if (modifier.HasVFX)
+        {
+            MyAvatar.PlayerVFXHandler.AddNewVFX(modifier.GetModifierVFX());
+        }
     }
 
     public void RemoveModifier(BasicModifierSource modifier)
     {
         activeModifiers.Remove(modifier);
         Debug.Log("Removed modifier!");
+
+        if (modifier.AttachedVFX != null)
+        {
+            MyAvatar.PlayerVFXHandler.RemoveVFX(modifier.AttachedVFX);
+        }
     }
 
 }
