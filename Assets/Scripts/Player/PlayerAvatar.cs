@@ -18,7 +18,7 @@ namespace PlayerController
 
         [SerializeField] private PlayerModifierHandler modifierHandler;
         [SerializeField] private PlayerAvatarData data;
-        [SerializeField] private Collider playerCollider;
+        [SerializeField] private SphereCollider playerCollider;
         [SerializeField] private MeshRenderer playerRenderer;
         [SerializeField] private ForceField forceField;
         [SerializeField] private PlayerVFXHandler vfxHandler;
@@ -27,9 +27,14 @@ namespace PlayerController
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody; public Rigidbody PlayerRigidbody { get { return playerRigidbody; } }
 
         public delegate void PlayerPushedAction(Transform pushed, Transform pusher, Vector3 pushForce);
-        public static event PlayerPushedAction OnAnyPlayerPushed; 
+        public static event PlayerPushedAction OnAnyPlayerPushed;
+
+        public delegate void PlayerAction();
+        public event PlayerAction OnDashStart;
+        public event PlayerAction OnDashRelease;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
+        private bool isGrounded; public bool IsGrounded { get { return isGrounded; }}
         private float pushMultiplier = 1f; 
 
         /// <summary>
@@ -79,7 +84,14 @@ namespace PlayerController
 
         void FixedUpdate()
         {
+            GroundCast();
             currentVelocity = playerRigidbody.linearVelocity;
+        }
+
+        void GroundCast()
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerCollider.radius + 0.02f, data.GroundCastLayers, QueryTriggerInteraction.Ignore);
+            isGrounded = hitColliders.Length > 0;
         }
 
         void OnCollisionEnter(Collision collision)
@@ -245,6 +257,8 @@ namespace PlayerController
             playerCollider.material.dynamicFriction = 0f;
             isDashing = false;
 
+            OnDashStart?.Invoke();
+
             while (true)
             {
                 dashForce = data.DashForceAtChargeTime.Evaluate(timer) + modifierHandler.GetValueModifier(ModifiedValueNumber.DashForce);
@@ -268,6 +282,8 @@ namespace PlayerController
             playerCollider.material.staticFriction = defaultStaticFriction;
             playerCollider.material.dynamicFriction = defaultDynamicFriction;
             isDashing = true;
+
+            OnDashRelease?.Invoke();
 
             while (timer < data.DashDuration)
             {

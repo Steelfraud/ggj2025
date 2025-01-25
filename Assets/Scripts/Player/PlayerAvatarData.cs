@@ -2,18 +2,12 @@ using UnityEngine;
 
 namespace PlayerController
 {
-    /*public enum MovementType
-    {
-        Force,
-        Torque,
-        Both
-    }*/
-
     [CreateAssetMenu(fileName = "New Player Avatar Data", menuName = "Player Controller/Player Avatar Data")]
     public class PlayerAvatarData : ScriptableObject
     {
-        //[Header("References")]
-        //public PhysicsMaterial PlayerPhysicsMaterial;
+        [Header("Physics")]
+        public LayerMask GroundCastLayers = 1;
+
         [Header("Pushing")]
         public AnimationCurve AddedPushMultiplierOnMove;
         public AnimationCurve AddedPushMultiplierOnDash;
