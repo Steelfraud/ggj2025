@@ -164,6 +164,7 @@ namespace PlayerController
             playerRenderer.material = color.PlayerMaterial;
             GameObject playerModel = Instantiate(color.PlayerModel, modelParent);
             playerModel.transform.localPosition = Vector3.zero;
+            playerModel.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         }
 
         public void Move(Vector3 moveDirection)
