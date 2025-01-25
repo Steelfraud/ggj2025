@@ -50,6 +50,20 @@ namespace PlayerController
             }
         }
 
+        void OnDash(InputValue inputValue)
+        {
+            float inputPressed = inputValue.Get<float>();
+
+            if (inputPressed > 0)
+            {
+                player.StartDash();
+            }
+            else
+            {
+                player.ReleaseDash();
+            }
+        }
+
         void OnRestart(InputValue inputValue)
         {
             if (!inputValue.isPressed)
@@ -66,8 +80,10 @@ namespace PlayerController
                 return false;
             }
 
+            // Flatten camera direction horizontally
             Vector3 cameraDirection = InputCamera.transform.forward;
             cameraDirection.y = 0;
+            cameraDirection = cameraDirection.normalized;
 
             Vector3 convertedInput = new Vector3(inputValue.x, 0f, inputValue.y);
             directionInWorld = Quaternion.LookRotation(cameraDirection) * convertedInput;
