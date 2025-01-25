@@ -46,6 +46,11 @@ public class GameManager : Singleton<GameManager>
     private List<Transform> usedSpawnPositions = new List<Transform>();
     private static Dictionary<int, PlayerColors> playerColors = new Dictionary<int, PlayerColors>();
 
+    private void Awake()
+    {
+        GameData.LoadDataFiles();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -152,7 +157,19 @@ public class GameManager : Singleton<GameManager>
     private void GameEnd()
     {
         gameOngoing = false;
-        UI.ToggleGameEndPanel(true);
+
+        string winnerText = "";
+
+        if (activePlayers.Count == 1)
+        {
+            winnerText = "Winner:\nPlayer " + activePlayers[0].MyColor.PlayerIndex;
+        }
+        else
+        {
+            winnerText = "Survived for:\n" + Mathf.RoundToInt(gameTimer) + " seconds";
+        }
+
+        UI.ShowGameEnd(winnerText);
         PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
 
         if (Spawner != null)

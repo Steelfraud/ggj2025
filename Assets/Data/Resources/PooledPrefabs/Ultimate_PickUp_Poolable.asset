@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ultimate_PickUp_Poolable
   m_EditorClassIdentifier: 
   prefab: {fileID: 3769421464357761239, guid: b5fbac1e517643049b32bd3c05005fb0, type: 3}
-  objectsToPreSpawn: 0
+  objectsToPreSpawn: 3
   instantiateNewObjectsWhenNeeded: 1
   keepObjectsAliveThroughSceneChanges: 0
   returnObjectsToPoolOnSceneChangeCall: 1
   groupIdentifiers: []
-  logNotBeingUsed: 1
-  logOveruseAndSpawning: 1
+  logNotBeingUsed: 0
+  logOveruseAndSpawning: 0

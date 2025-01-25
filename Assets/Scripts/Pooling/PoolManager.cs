@@ -49,15 +49,15 @@ public class PoolManager : MonoBehaviour
 
                 if (this.objectSettings != null)
                 {
-                    Rigidbody objectBody = this._object.GetComponent<Rigidbody>();
+                    //Rigidbody objectBody = this._object.GetComponent<Rigidbody>();
 
-                    if (this.objectSettings.setRigidBodyForce && objectBody != null)
-                    {
-                        objectBody.linearVelocity = new Vector3();
-                        objectBody.angularVelocity = new Vector3();
+                    //if (this.objectSettings.setRigidBodyForce && objectBody != null)
+                    //{
+                    //    objectBody.linearVelocity = new Vector3();
+                    //    objectBody.angularVelocity = new Vector3();
 
-                        objectBody.AddForce(this.objectSettings.rigidbodyForceToSet, this.objectSettings.forceModeToSend);
-                    }
+                    //    objectBody.AddForce(this.objectSettings.rigidbodyForceToSet, this.objectSettings.forceModeToSend);
+                    //}
 
                     if (this.objectSettings.actionToCallWhenActivated != null)
                     {

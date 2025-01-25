@@ -31,7 +31,7 @@ public class PlayerPanel : MonoBehaviour
         }
         else
         {
-            PlayerDamageLabel.text = "0%";
+            PlayerDamageLabel.text = "DED";
         }
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Push_PickUp_Poolable
   m_EditorClassIdentifier: 
   prefab: {fileID: 3769421464357761239, guid: c77e97ccd6ec8694990b489c6a63d541, type: 3}
-  objectsToPreSpawn: 0
+  objectsToPreSpawn: 3
   instantiateNewObjectsWhenNeeded: 1
   keepObjectsAliveThroughSceneChanges: 0
   returnObjectsToPoolOnSceneChangeCall: 1

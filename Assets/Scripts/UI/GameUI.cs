@@ -6,15 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
-    public class PlayerPanelUIPool : GenericUIPool<PlayerPanel> { }
-
     public TextMeshProUGUI TimerLabel;
     public GameObject GameEndPanelParent;
+    public TextMeshProUGUI WinnerText;
 
     public List<PlayerPanel> AvailablePlayerPanels;
-    public PlayerPanel FirstPlayerPanel;
-
-    private PlayerPanelUIPool panelPool;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,6 +35,12 @@ public class GameUI : MonoBehaviour
                 TimerLabel.text = "";
             }
         }
+    }
+
+    public void ShowGameEnd(string winnerText)
+    {
+        ToggleGameEndPanel(true);
+        WinnerText.text = winnerText;
     }
 
     public void ToggleGameEndPanel(bool setTo)

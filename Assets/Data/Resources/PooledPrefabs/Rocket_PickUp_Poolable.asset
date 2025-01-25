@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rocket_PickUp_Poolable
   m_EditorClassIdentifier: 
   prefab: {fileID: 3769421464357761239, guid: 22c43e4c74fb3c8488d8465ec52282be, type: 3}
-  objectsToPreSpawn: 0
+  objectsToPreSpawn: 3
   instantiateNewObjectsWhenNeeded: 1
   keepObjectsAliveThroughSceneChanges: 0
   returnObjectsToPoolOnSceneChangeCall: 1
