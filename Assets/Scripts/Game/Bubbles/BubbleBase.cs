@@ -13,6 +13,8 @@ public class BubbleBase : MonoBehaviour
 
     private float destroyAfterSeconds = 5;
     public float initialMoveForce = 3f;
+    [SerializeField, Min(0f)]
+    private float lifeTime = 10f;
     private Rigidbody rb;
     private Collider bubbleCollider;
     private Animator bubbleAnimator;
@@ -28,6 +30,7 @@ public class BubbleBase : MonoBehaviour
 
         rb.AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
         bubbleCollider.enabled = true;
+        StartCoroutine(TimeOutBubble());
     }
 
     private void OnCollisionEnter(Collision other)
@@ -59,6 +62,12 @@ public class BubbleBase : MonoBehaviour
             StartCoroutine(DestroyBubble());
             Debug.Log("Destroy");
         }
+    }
+
+    IEnumerator TimeOutBubble()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        StartCoroutine(DestroyBubble());
     }
 
     public IEnumerator DestroyBubble()

@@ -36,7 +36,7 @@ public class BubbleSpawner : MonoBehaviour
 
     void SpawnBubbles(int amount)
     {
-        for (int i = 1; i < amount; i++)
+        for (int i = 0; i < amount; i++)
         {
             Vector3 spawnPosition = spawnPoint.position + new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.5f, Random.Range(-spawnRangeZ, spawnRangeZ));
             PoolManager.Instance.GetPooledObject(bubblePrefabs.GetRandomElementFromList().gameObject, new PoolObjectSettings() { positionToSet = spawnPosition, rotationToSet = spawnPoint.rotation, timeBeforeReturningToPool = 60f });
@@ -46,6 +46,7 @@ public class BubbleSpawner : MonoBehaviour
 
     IEnumerator StartSpawner()
     {
+        yield return new WaitForEndOfFrame(); // fixes null ref 
         SpawnBubbles(SpawnAmount);
         yield return new WaitForSeconds(DelayBetweenWaves);
         StartCoroutine(StartSpawner());
