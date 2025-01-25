@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7012056946386735580, guid: eb5a6da1f34d8e341b13bb05accef18b, type: 3}
+      propertyPath: addedPushMultiplier
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5372139549960747354, guid: eb5a6da1f34d8e341b13bb05accef18b, type: 3}
     m_RemovedGameObjects: []

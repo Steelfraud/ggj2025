@@ -8,6 +8,9 @@ public class BubbleBase : MonoBehaviour
     [SerializeField]
     private float force = 1000f;
 
+    [SerializeField, Min(0f)]
+    private float addedPushMultiplier = 0.2f;
+
     private float destroyAfterSeconds = 5;
     public float initialMoveForce = 3f;
     private Rigidbody rb;
@@ -29,11 +32,11 @@ public class BubbleBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<PlayerAvatar>().ultimateFormEnabled)
+        if (other.gameObject.tag == "Player" && other.gameObject.TryGetComponent(out PlayerAvatar playerAvatar) && !playerAvatar.ultimateFormEnabled)
         {
             Vector3 direction = other.transform.position - transform.position;
-            float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
-            other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction, ForceMode.VelocityChange);
+            float newForce = playerAvatar.PlayerRigidbody.linearVelocity.magnitude + force;
+            playerAvatar.Push(transform, newForce * direction, addedPushMultiplier);
 
             StartCoroutine(DestroyBubble());
         }
