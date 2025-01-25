@@ -29,7 +29,7 @@ public class BubbleBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Player" && !other.gameObject.GetComponent<Player>().ultimateFormEnabled)
+        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<PlayerAvatar>().ultimateFormEnabled)
         {
             Vector3 direction = other.transform.position - transform.position;
             float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;

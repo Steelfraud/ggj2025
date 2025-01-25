@@ -9,7 +9,7 @@ public class UltimatePickUp : PlayerPickUpObjectBase
     [SerializeField]
     private float durationSeconds = 10f;
 
-    protected override void ApplyEffect(Player player)
+    protected override void ApplyEffect(PlayerAvatar player)
     {
         if (player.ultimateFormEnabled) return;
 

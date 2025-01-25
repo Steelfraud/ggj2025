@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
     private int highestPlayerCount = 0;
     private List<PickUpSpawnPosition> pickUpSpawns = new List<PickUpSpawnPosition>(); 
     private List<PlayerPickUpObjectBase> activePickUps = new List<PlayerPickUpObjectBase>();
-    private List<Player> activePlayers = new List<Player>();
+    public List<PlayerAvatar> activePlayers = new List<PlayerAvatar>();
     private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
     private List<PlayerColors> usedColors = new List<PlayerColors>();
@@ -97,7 +97,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void KillPlayer(Player player)
+    public void KillPlayer(PlayerAvatar player)
     {
         activePlayers.Remove(player);
         player.gameObject.SetActive(false);
@@ -190,16 +190,17 @@ public class GameManager : Singleton<GameManager>
         randomSpawnPos.ActivePickUp = pickUpScript;
         newPickUp.transform.position = randomSpawnPos.transform.position;
 
+        pickUpScript.SetupPickup(randomPickUp);
+
         CustomCamera.Instance.AddToTargetGroup(newPickUp.transform, 0.25f);
     }
 
     public void OnPlayerJoined(PlayerInput input)
     {
         Player newPlayer = input.gameObject.GetComponent<Player>();
-        activePlayers.Add(newPlayer);
+        
         joinedPlayers.Add(newPlayer);
-        highestPlayerCount++;
-        CustomCamera.Instance.AddToTargetGroup(input.transform);
+        highestPlayerCount++;        
 
         List<Transform> possibleSpawns = new List<Transform>(PlayerSpawnPositions);
         possibleSpawns.RemoveAll(x => usedSpawnPositions.Contains(x));
@@ -213,14 +214,17 @@ public class GameManager : Singleton<GameManager>
         Transform spawnPos = possibleSpawns.GetRandomElementFromList();
         usedSpawnPositions.Add(spawnPos);
 
-        newPlayer.transform.position = spawnPos.transform.position;
+        //newPlayer.transform.position = spawnPos.transform.position;
 
         List<PlayerColors> availableColors = new List<PlayerColors>(AvailableColors);
         availableColors.RemoveAll(x => usedColors.Contains(x));
         PlayerColors colorToSet = availableColors.GetRandomElementFromList();
         usedColors.Add(colorToSet);
 
-        newPlayer.SetPlayerColor(colorToSet);
+        //newPlayer.SetPlayerColor(colorToSet);
+        activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
+
+        CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
     }
 
 }
