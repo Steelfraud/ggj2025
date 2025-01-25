@@ -22,6 +22,18 @@ namespace PlayerController
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody;
 
+        public delegate void PlayerPushedAction(PlayerAvatar pushedPlayerAvatar, Vector3 pushForce);
+        public static event PlayerPushedAction OnAnyPlayerPushed; 
+
+        private bool isDashing; public bool IsDashing { get { return isDashing; } }
+        private float pushMultiplier = 1f; 
+
+        /// <summary>
+        /// This value gets increased after getting pushed
+        /// </summary>
+        public float PushMultiplier { get { return pushMultiplier; } }
+
+        private Vector3 currentVelocity;
         private Vector3 lastMoveDirection;
         private Vector3 lastNonZeroMoveDirection = new Vector3(0f, 0f, 1f);
         private float dashForce;
@@ -32,6 +44,7 @@ namespace PlayerController
         private float defaultStaticFriction;
         private float defaultDynamicFriction;
         private float canDashAtTime;
+        private float canPushAtTime;
 
         void OnValidate()
         {
@@ -40,13 +53,15 @@ namespace PlayerController
 
         void Awake()
         {
-            defaultStaticFriction = data.PlayerPhysicsMaterial.staticFriction;
-            defaultDynamicFriction = data.PlayerPhysicsMaterial.dynamicFriction;
+            defaultStaticFriction = playerCollider.material.staticFriction;
+            defaultDynamicFriction = playerCollider.material.dynamicFriction;
             playerRigidbody.maxAngularVelocity = data.MoveMaxAngularVelocity;
         }
 
         void OnDisable()
         {
+            pushMultiplier = 1f;
+            isDashing = false;
             moveRoutine = null;
         }
 
@@ -56,12 +71,76 @@ namespace PlayerController
                 CustomCamera.Instance.RemoveFromTargetGroup(transform);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        void FixedUpdate()
         {
-            if (ultimateFormEnabled && collision.gameObject.GetComponent<Rigidbody>())
+            currentVelocity = playerRigidbody.linearVelocity;
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.gameObject.tag == "Player" && collision.collider.TryGetComponent(out PlayerAvatar playerAvatar))
             {
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(UltimateForce * (collision.transform.position - transform.position), ForceMode.VelocityChange);
+                (PlayerAvatar collisionLoser, Vector3 pushForce) = GetCollisionLoser(this, playerAvatar);
+
+                // If collision loser is null, it didn't have a dashing player
+                if (collisionLoser != null)
+                {
+                    collisionLoser.Push(pushForce);
+                }
             }
+            if (ultimateFormEnabled && collision.collider.TryGetComponent(out Rigidbody hitBody))
+            {
+                hitBody.AddForce(UltimateForce * (collision.transform.position - transform.position), ForceMode.VelocityChange);
+            }
+        }
+
+        (PlayerAvatar collisionLoser, Vector3 pushForce) GetCollisionLoser(PlayerAvatar avatarA, PlayerAvatar avatarB)
+        {
+            if (avatarA.currentVelocity.magnitude > avatarB.currentVelocity.magnitude)
+            {
+                if (avatarA.IsDashing)
+                {
+                    return (avatarB, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
+                }
+                else
+                {
+                    return (avatarB, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
+                }
+            }
+            else if (avatarB.currentVelocity.magnitude > avatarA.currentVelocity.magnitude)
+            {
+                if (avatarB.IsDashing)
+                {
+                    return (avatarA, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
+                }
+                else
+                {
+                    return (avatarA, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
+                }
+            }
+            else
+            {
+                return (null, Vector3.zero);
+            }
+        }
+
+        public void Freeze()
+        {
+            playerRigidbody.linearVelocity = Vector3.zero;
+            playerRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        public void Push(Vector3 pushForce)
+        {
+            if (Time.time < canPushAtTime)
+                return;
+
+            Debug.Log("Pushed: " + gameObject.GetInstanceID() + " | Final Force: " + (pushForce.magnitude * pushMultiplier).ToString("F2") + " | Just Multiplier: " + pushMultiplier.ToString("F2") + " | Frame: " + Time.frameCount);
+            canPushAtTime = Time.time + data.PushedCooldown;
+            playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
+            pushMultiplier += data.AddedPushMultiplierAtCollisionVelocity.Evaluate(pushForce.magnitude);
+
+            OnAnyPlayerPushed?.Invoke(this, pushForce);
         }
 
         public void SetPlayerColor(GameManager.PlayerColors color)
@@ -72,7 +151,7 @@ namespace PlayerController
 
         public void Move(Vector3 moveDirection)
         {
-            if (data == null)
+            if (data == null )
                 return;
 
             lastMoveDirection = moveDirection;
@@ -116,7 +195,7 @@ namespace PlayerController
             startDashRoutine = null;
             releaseDashRoutine = StartCoroutine(ReleaseDashRoutine());
         }
-        
+
         public void TriggerUltimateForm(float durationSeconds, float force)
         {
             UltimateForce = force;
@@ -124,7 +203,7 @@ namespace PlayerController
         }
 
         IEnumerator UltimateForm(float durationSeconds)
-        {            
+        {
             ultimateFormEnabled = true;
             yield return new WaitForSeconds(durationSeconds);
             ultimateFormEnabled = false;
@@ -169,11 +248,12 @@ namespace PlayerController
             playerRigidbody.maxAngularVelocity = data.DashMaxAngularVelocity;
             playerCollider.material.staticFriction = 0f;
             playerCollider.material.dynamicFriction = 0f;
+            isDashing = false;
 
             while (true)
             {
                 //playerRigidbody.AddTorque(-playerRigidbody.angularVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
-                
+
                 dashForce = data.DashForceAtChargeTime.Evaluate(timer) + modifierHandler.GetValueModifier(ModifiedValueNumber.DashForce);
                 playerRigidbody.AddForce(-playerRigidbody.linearVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
                 playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastNonZeroMoveDirection.normalized) * dashForce, ForceMode.VelocityChange);
@@ -190,11 +270,12 @@ namespace PlayerController
 
             Debug.DrawRay(transform.position, lastNonZeroMoveDirection * 2f, Color.magenta, data.DashDuration);
             float timer = 0f;
-            
+
             canDashAtTime = Time.time + data.DashCooldown;
             playerCollider.material.staticFriction = defaultStaticFriction;
             playerCollider.material.dynamicFriction = defaultDynamicFriction;
-            
+            isDashing = true;
+
             //Vector3 dashDirection = lastNonZeroMoveDirection.normalized;
 
             while (timer < data.DashDuration)
@@ -205,7 +286,8 @@ namespace PlayerController
                 playerRigidbody.maxAngularVelocity = Mathf.Lerp(data.DashMaxAngularVelocity, data.MoveMaxAngularVelocity, timer / data.DashDuration);
                 yield return fixedUpdateWait;
             }
-            
+
+            isDashing = false;
             releaseDashRoutine = null;
         }
     }
