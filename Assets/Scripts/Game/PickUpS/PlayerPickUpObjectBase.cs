@@ -16,11 +16,6 @@ public class PlayerPickUpObjectBase : MonoBehaviour
         }
     }
 
-    public void OnEnable()
-    {
-        CustomCamera.Instance.AddToTargetGroup(transform, 0.3f);
-    }
-
     public virtual void SetupPickup(PickUpDataObject pickUpDataObject)
     {
         myData = pickUpDataObject;
