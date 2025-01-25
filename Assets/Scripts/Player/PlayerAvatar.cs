@@ -22,7 +22,7 @@ namespace PlayerController
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody;
 
-        public delegate void PlayerPushedAction(PlayerAvatar pushedPlayerAvatar, Vector3 pushForce);
+        public delegate void PlayerPushedAction(PlayerAvatar pushed, PlayerAvatar pusher, Vector3 pushForce);
         public static event PlayerPushedAction OnAnyPlayerPushed; 
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
@@ -61,6 +61,8 @@ namespace PlayerController
         void OnDisable()
         {
             pushMultiplier = 1f;
+            canDashAtTime = 0f;
+            canPushAtTime = 0f;
             isDashing = false;
             moveRoutine = null;
         }
@@ -80,12 +82,12 @@ namespace PlayerController
         {
             if (collision.collider.gameObject.tag == "Player" && collision.collider.TryGetComponent(out PlayerAvatar playerAvatar))
             {
-                (PlayerAvatar collisionLoser, Vector3 pushForce) = GetCollisionLoser(this, playerAvatar);
+                (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) = GetCollisionLoser(this, playerAvatar);
 
                 // If collision loser is null, it didn't have a dashing player
                 if (collisionLoser != null)
                 {
-                    collisionLoser.Push(pushForce);
+                    collisionLoser.Push(collisionWinner, pushForce);
                 }
             }
             if (ultimateFormEnabled && collision.collider.TryGetComponent(out Rigidbody hitBody))
@@ -94,33 +96,29 @@ namespace PlayerController
             }
         }
 
-        (PlayerAvatar collisionLoser, Vector3 pushForce) GetCollisionLoser(PlayerAvatar avatarA, PlayerAvatar avatarB)
+        (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) GetCollisionLoser(PlayerAvatar avatarA, PlayerAvatar avatarB)
         {
             if (avatarA.currentVelocity.magnitude > avatarB.currentVelocity.magnitude)
             {
                 if (avatarA.IsDashing)
                 {
-                    return (avatarB, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
+                    return (avatarB, avatarA, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
                 }
                 else
                 {
-                    return (avatarB, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
-                }
-            }
-            else if (avatarB.currentVelocity.magnitude > avatarA.currentVelocity.magnitude)
-            {
-                if (avatarB.IsDashing)
-                {
-                    return (avatarA, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
-                }
-                else
-                {
-                    return (avatarA, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
+                    return (avatarB, avatarA, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
                 }
             }
             else
             {
-                return (null, Vector3.zero);
+                if (avatarB.IsDashing)
+                {
+                    return (avatarA, avatarB, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
+                }
+                else
+                {
+                    return (avatarA, avatarB, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.MovePushForceMultiplier);
+                }
             }
         }
 
@@ -130,7 +128,7 @@ namespace PlayerController
             playerRigidbody.angularVelocity = Vector3.zero;
         }
 
-        public void Push(Vector3 pushForce)
+        public void Push(PlayerAvatar pusher, Vector3 pushForce)
         {
             if (Time.time < canPushAtTime)
                 return;
@@ -140,7 +138,7 @@ namespace PlayerController
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
             pushMultiplier += data.AddedPushMultiplierAtCollisionVelocity.Evaluate(pushForce.magnitude);
 
-            OnAnyPlayerPushed?.Invoke(this, pushForce);
+            OnAnyPlayerPushed?.Invoke(this, pusher, pushForce);
         }
 
         public void SetPlayerColor(GameManager.PlayerColors color)
@@ -223,14 +221,14 @@ namespace PlayerController
                 velocityToInputDot = Vector3.Dot(playerRigidbody.linearVelocity.normalized, lastMoveDirection);
                 turnTorque = data.TurnTorqueAtTurnDot.Evaluate(velocityToInputDot);
 
-                if (data.MovementType == MovementType.Torque || data.MovementType == MovementType.Both)
+                //if (data.MovementType == MovementType.Torque || data.MovementType == MovementType.Both)
                 {
                     playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastMoveDirection) * (data.MoveTorque + modifierHandler.GetValueModifier(ModifiedValueNumber.MoveTorque)));
                 }
-                if (data.MovementType == MovementType.Force || data.MovementType == MovementType.Both)
+                /*if (data.MovementType == MovementType.Force || data.MovementType == MovementType.Both)
                 {
                     playerRigidbody.AddForce(lastMoveDirection * (data.MoveForce + modifierHandler.GetValueModifier(ModifiedValueNumber.MoveForce)));
-                }
+                }*/
 
                 Debug.DrawRay(playerRigidbody.transform.position + Vector3.up * 0.5f, lastMoveDirection * turnTorque / maxTurnTorque, Color.green, Time.fixedDeltaTime);
 

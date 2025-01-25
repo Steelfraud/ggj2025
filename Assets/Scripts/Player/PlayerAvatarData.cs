@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace PlayerController
 {
-    public enum MovementType
+    /*public enum MovementType
     {
         Force,
         Torque,
         Both
-    }
+    }*/
 
     [CreateAssetMenu(fileName = "New Player Avatar Data", menuName = "Player Controller/Player Avatar Data")]
     public class PlayerAvatarData : ScriptableObject
@@ -23,8 +23,8 @@ namespace PlayerController
         [Min(0f)] public float DashMaxAngularVelocity = 100f;
 
         [Header("Moving")]
-        public MovementType MovementType = MovementType.Torque;
-        [Min(0f)] public float MoveForce = 10;
+        //public MovementType MovementType = MovementType.Torque;
+        //[Min(0f)] public float MoveForce = 10;
         [Min(0f)] public float MoveTorque = 10;
         [Range(0f, 10f)] public float MovePushForceMultiplier = 1;
 
