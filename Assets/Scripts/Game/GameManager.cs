@@ -8,6 +8,13 @@ using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
+    [System.Serializable]
+    public class PlayerColors
+    {
+        public Material PlayerMaterial;
+        public Color PlayerColor;
+    }
+
     [Header("References")]
     public GameUI UI;
     public BubbleSpawner Spawner;
@@ -23,6 +30,7 @@ public class GameManager : Singleton<GameManager>
     public float PickupMinimumTime = 1f;
     public float PickupMaximumTime = 10f;
     public int MaximumPickUps = 0;
+    public List<PlayerColors> AvailableColors;
 
     public bool GameGoing => gameOngoing;
     public float RoundTimer => gameTimer;
@@ -34,7 +42,9 @@ public class GameManager : Singleton<GameManager>
     private List<PickUpSpawnPosition> pickUpSpawns = new List<PickUpSpawnPosition>(); 
     private List<PlayerPickUpObjectBase> activePickUps = new List<PlayerPickUpObjectBase>();
     private List<Player> activePlayers = new List<Player>();
+    private List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
+    private List<PlayerColors> usedColors = new List<PlayerColors>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -93,7 +103,7 @@ public class GameManager : Singleton<GameManager>
     public void KillPlayer(Player player)
     {
         activePlayers.Remove(player);
-        Destroy(player.gameObject);
+        player.gameObject.SetActive(false);
         TargetGroup.RemoveMember(player.transform);
 
         if ((highestPlayerCount > 1 && activePlayers.Count == 1) || activePlayers.Count == 0)
@@ -117,10 +127,16 @@ public class GameManager : Singleton<GameManager>
             timeTillNextPickup = Random.Range(PickupMinimumTime, PickupMaximumTime);
         }        
 
+        foreach (Player player in joinedPlayers) 
+        {
+            Destroy(player.gameObject);
+        }
+
         usedSpawnPositions.Clear();
+        usedColors.Clear();
 
         highestPlayerCount = 0;
-        int playerIndex = 0;
+        //int playerIndex = 0;
 
         //foreach (InputDevice device in InputSystem.devices) 
         //{
@@ -184,6 +200,7 @@ public class GameManager : Singleton<GameManager>
     {
         Player newPlayer = input.gameObject.GetComponent<Player>();
         activePlayers.Add(newPlayer);
+        joinedPlayers.Add(newPlayer);
         highestPlayerCount++;
         TargetGroup.AddMember(input.transform, 1, 1);
 
@@ -200,6 +217,13 @@ public class GameManager : Singleton<GameManager>
         usedSpawnPositions.Add(spawnPos);
 
         newPlayer.transform.position = spawnPos.transform.position;
+
+        List<PlayerColors> availableColors = new List<PlayerColors>(AvailableColors);
+        availableColors.RemoveAll(x => usedColors.Contains(x));
+        PlayerColors colorToSet = availableColors.GetRandomElementFromList();
+        usedColors.Add(colorToSet);
+
+        newPlayer.SetPlayerColor(colorToSet);
     }
 
 }

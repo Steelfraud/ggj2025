@@ -6,8 +6,11 @@ namespace PlayerController
     [RequireComponent(typeof(Rigidbody))]
     public class Player : MonoBehaviour
     {
+        public GameManager.PlayerColors MyColor;
+
         [SerializeField] private PlayerData data;
         [SerializeField] private Collider playerCollider;
+        [SerializeField] private MeshRenderer playerRenderer;
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody;
 
@@ -42,6 +45,12 @@ namespace PlayerController
         private void OnDestroy()
         {
             //CustomCamera.Instance.RemoveFromTargetGroup(transform);
+        }
+
+        public void SetPlayerColor(GameManager.PlayerColors color)
+        {
+            MyColor = color;
+            playerRenderer.material = color.PlayerMaterial;
         }
 
         public void Move(Vector3 moveDirection)
