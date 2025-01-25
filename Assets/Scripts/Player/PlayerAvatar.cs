@@ -28,6 +28,7 @@ namespace PlayerController
 
         public delegate void PlayerPushedAction(Transform pushed, Transform pusher, Vector3 pushForce);
         public static event PlayerPushedAction OnAnyPlayerPushed;
+        public event PlayerPushedAction OnPushed;
 
         public delegate void PlayerAction();
         public event PlayerAction OnDashStart;
@@ -155,6 +156,7 @@ namespace PlayerController
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
             pushMultiplier += addedPushMultiplier;
 
+            OnPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
             OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
         }
 
@@ -296,7 +298,7 @@ namespace PlayerController
 
             isDashing = false;
             releaseDashRoutine = null;
-            
+
             OnDashEnd?.Invoke();
         }
     }

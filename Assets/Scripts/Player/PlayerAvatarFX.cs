@@ -9,6 +9,7 @@ namespace PlayerController
         [SerializeField] private ParticleSystem dashChargeParticles;
         [SerializeField] private ParticleSystem dashShockwaveParticles;
         [SerializeField] private ParticleSystem dashingParticles;
+        [SerializeField] private ParticleSystem pushedParticles;
 
         [HideInInspector, SerializeField] private PlayerAvatar playerAvatar;
 
@@ -26,9 +27,8 @@ namespace PlayerController
             playerAvatar.OnDashStart += OnDashStart;
             playerAvatar.OnDashRelease += OnDashRelease;
             playerAvatar.OnDashEnd += OnDashEnd;
+            playerAvatar.OnPushed += OnPushed;
         }
-
-        
 
         void OnDisable()
         {
@@ -37,6 +37,7 @@ namespace PlayerController
             playerAvatar.OnDashStart -= OnDashStart;
             playerAvatar.OnDashRelease -= OnDashRelease;
             playerAvatar.OnDashEnd -= OnDashEnd;
+            playerAvatar.OnPushed -= OnPushed;
         }
 
         void InitializeFX()
@@ -71,6 +72,11 @@ namespace PlayerController
         void OnDashEnd()
         {
             dashingParticles.Stop();
+        }
+
+        void OnPushed(Transform pushed, Transform pusher, Vector3 pushForce)
+        {
+            pushedParticles.Play();
         }
     }
 }
