@@ -44,7 +44,7 @@ namespace PlayerController
 
         private void OnDestroy()
         {
-            //CustomCamera.Instance.RemoveFromTargetGroup(transform);
+            CustomCamera.Instance.RemoveFromTargetGroup(transform);
         }
 
         public void SetPlayerColor(GameManager.PlayerColors color)

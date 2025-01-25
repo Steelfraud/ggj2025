@@ -9,13 +9,13 @@ public class CustomCamera : Singleton<CustomCamera>
         CreateSingleton(this, SetDontDestroy);
     }
 
-    public void AddToTargetGroup(Transform transform)
+    public void AddToTargetGroup(Transform transform, float weigth = 1)
     {
         if (targetGroup == null || targetGroup.FindMember(transform) != -1)
         {
             return;
         }
-        targetGroup.AddMember(transform, 1, .5f);
+        targetGroup.AddMember(transform, weigth, .5f);
     }
 
     public void RemoveFromTargetGroup(Transform transform)

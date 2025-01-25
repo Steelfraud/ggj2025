@@ -20,7 +20,6 @@ public class GameManager : Singleton<GameManager>
     public BubbleSpawner Spawner;
     public Transform PlayerSpawnPos;
     public PlayerInputManager PlayerInputManager;
-    public CinemachineTargetGroup TargetGroup;
     public List<Transform> PlayerSpawnPositions;
 
     [Header("Game Settings")]
@@ -96,15 +95,13 @@ public class GameManager : Singleton<GameManager>
         {
             spawn.ActivePickUp = null;
         }
-
-        TargetGroup.RemoveMember(pickUp.transform);
     }
 
     public void KillPlayer(Player player)
     {
         activePlayers.Remove(player);
         player.gameObject.SetActive(false);
-        TargetGroup.RemoveMember(player.transform);
+        CustomCamera.Instance.RemoveFromTargetGroup(player.transform);
 
         if ((highestPlayerCount > 1 && activePlayers.Count == 1) || activePlayers.Count == 0)
         {
@@ -202,7 +199,7 @@ public class GameManager : Singleton<GameManager>
         activePlayers.Add(newPlayer);
         joinedPlayers.Add(newPlayer);
         highestPlayerCount++;
-        TargetGroup.AddMember(input.transform, 1, 1);
+        CustomCamera.Instance.AddToTargetGroup(input.transform);
 
         List<Transform> possibleSpawns = new List<Transform>(PlayerSpawnPositions);
         possibleSpawns.RemoveAll(x => usedSpawnPositions.Contains(x));
