@@ -27,7 +27,7 @@ namespace PlayerController
 
         void OnDisable()
         {
-            Destroy(fxBase);
+            Destroy(fxBase.gameObject);
 
             playerAvatar.OnDashStart -= OnDashStart;
             playerAvatar.OnDashRelease -= OnDashRelease;
