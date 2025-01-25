@@ -190,6 +190,8 @@ public class GameManager : Singleton<GameManager>
         randomSpawnPos.ActivePickUp = pickUpScript;
         newPickUp.transform.position = randomSpawnPos.transform.position;
 
+        pickUpScript.SetupPickup(randomPickUp);
+
         CustomCamera.Instance.AddToTargetGroup(newPickUp.transform, 0.25f);
     }
 

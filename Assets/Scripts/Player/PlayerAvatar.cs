@@ -8,6 +8,9 @@ namespace PlayerController
     {
         public GameManager.PlayerColors MyColor;
 
+        public PlayerModifierHandler PlayerModifierHandler => modifierHandler;
+
+        [SerializeField] private PlayerModifierHandler modifierHandler;
         [SerializeField] private PlayerAvatarData data;
         [SerializeField] private Collider playerCollider;
         [SerializeField] private MeshRenderer playerRenderer;
@@ -117,11 +120,11 @@ namespace PlayerController
 
                 if (data.MovementType == MovementType.Torque || data.MovementType == MovementType.Both)
                 {
-                    playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastMoveDirection) * data.MoveTorque);
+                    playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastMoveDirection) * (data.MoveTorque + modifierHandler.GetValueModifier(ModifiedValueNumber.MoveTorque)));
                 }
                 if (data.MovementType == MovementType.Force || data.MovementType == MovementType.Both)
                 {
-                    playerRigidbody.AddForce(lastMoveDirection * data.MoveForce);
+                    playerRigidbody.AddForce(lastMoveDirection * (data.MoveForce + modifierHandler.GetValueModifier(ModifiedValueNumber.MoveForce)));
                 }
 
                 Debug.DrawRay(playerRigidbody.transform.position + Vector3.up * 0.5f, lastMoveDirection * turnTorque / maxTurnTorque, Color.green, Time.fixedDeltaTime);
@@ -145,7 +148,7 @@ namespace PlayerController
             {
                 //playerRigidbody.AddTorque(-playerRigidbody.angularVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
                 
-                dashForce = data.DashForceAtChargeTime.Evaluate(timer);
+                dashForce = data.DashForceAtChargeTime.Evaluate(timer) + modifierHandler.GetValueModifier(ModifiedValueNumber.DashForce);
                 playerRigidbody.AddForce(-playerRigidbody.linearVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
                 playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastNonZeroMoveDirection.normalized) * dashForce, ForceMode.VelocityChange);
 
