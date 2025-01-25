@@ -2,27 +2,32 @@ using UnityEngine;
 
 namespace PlayerController
 {
-    public enum MovementType
+    /*public enum MovementType
     {
         Force,
         Torque,
         Both
-    }
+    }*/
 
     [CreateAssetMenu(fileName = "New Player Avatar Data", menuName = "Player Controller/Player Avatar Data")]
     public class PlayerAvatarData : ScriptableObject
     {
-        [Header("References")]
-        public PhysicsMaterial PlayerPhysicsMaterial;
+        //[Header("References")]
+        //public PhysicsMaterial PlayerPhysicsMaterial;
+        [Header("Pushing")]
+        public AnimationCurve AddedPushMultiplierOnMove;
+        public AnimationCurve AddedPushMultiplierOnDash;
+        [Min(0f)] public float PushedCooldown = 0.2f;
 
         [Header("Limits")]
         [Min(0f)] public float MoveMaxAngularVelocity = 20f;
         [Min(0f)] public float DashMaxAngularVelocity = 100f;
 
-        [Space]
-        public MovementType MovementType = MovementType.Torque;
-        [Min(0f)] public float MoveForce = 10;
+        [Header("Moving")]
+        //public MovementType MovementType = MovementType.Torque;
+        //[Min(0f)] public float MoveForce = 10;
         [Min(0f)] public float MoveTorque = 10;
+        [Range(0f, 10f)] public float MovePushForceMultiplier = 1;
 
         [Space]
         public AnimationCurve TurnTorqueAtTurnDot;
@@ -32,6 +37,7 @@ namespace PlayerController
         public AnimationCurve DashBrakingAtChargeTime;
         [Min(0f)] public float DashDuration = 0.5f;
         [Min(0f)] public float DashCooldown = 2;
+        [Range(0f, 10f)] public float DashPushForceMultiplier = 1;
 
         public float GetMaxTurnTorque()
         {
