@@ -10,6 +10,11 @@ namespace PlayerController
 
         public PlayerModifierHandler PlayerModifierHandler => modifierHandler;
 
+        [HideInInspector]
+        public float UltimateForce;
+        [HideInInspector]
+        public bool ultimateFormEnabled;
+
         [SerializeField] private PlayerModifierHandler modifierHandler;
         [SerializeField] private PlayerAvatarData data;
         [SerializeField] private Collider playerCollider;
@@ -49,6 +54,14 @@ namespace PlayerController
         {
             if (CustomCamera.Instance != null)
                 CustomCamera.Instance.RemoveFromTargetGroup(transform);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (ultimateFormEnabled && collision.gameObject.GetComponent<Rigidbody>())
+            {
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(UltimateForce * (collision.transform.position - transform.position), ForceMode.VelocityChange);
+            }
         }
 
         public void SetPlayerColor(GameManager.PlayerColors color)
@@ -102,6 +115,19 @@ namespace PlayerController
             StopCoroutine(startDashRoutine);
             startDashRoutine = null;
             releaseDashRoutine = StartCoroutine(ReleaseDashRoutine());
+        }
+        
+        public void TriggerUltimateForm(float durationSeconds, float force)
+        {
+            UltimateForce = force;
+            StartCoroutine(UltimateForm(durationSeconds));
+        }
+
+        IEnumerator UltimateForm(float durationSeconds)
+        {            
+            ultimateFormEnabled = true;
+            yield return new WaitForSeconds(durationSeconds);
+            ultimateFormEnabled = false;
         }
 
         IEnumerator MoveRoutine()
