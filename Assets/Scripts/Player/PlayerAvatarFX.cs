@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace PlayerController
 {
@@ -10,6 +11,7 @@ namespace PlayerController
         [SerializeField] private ParticleSystem dashShockwaveParticles;
         [SerializeField] private ParticleSystem dashingParticles;
         [SerializeField] private ParticleSystem pushedParticles;
+        [SerializeField] private DecalProjector heightShadowDecal;
 
         [HideInInspector, SerializeField] private PlayerAvatar playerAvatar;
 
@@ -43,10 +45,14 @@ namespace PlayerController
         void InitializeFX()
         {
             fxBase = new GameObject("FX Base").transform;
+
             dashChargeParticles.transform.SetParent(fxBase.transform);
             dashShockwaveParticles.transform.SetParent(fxBase.transform);
+            heightShadowDecal.transform.SetParent(fxBase.transform);
+
             dashChargeParticles.transform.localPosition = Vector3.down * 0.5f;
             dashShockwaveParticles.transform.localPosition = Vector3.zero;
+            heightShadowDecal.transform.localPosition = Vector3.zero;
         }
 
         void Update()

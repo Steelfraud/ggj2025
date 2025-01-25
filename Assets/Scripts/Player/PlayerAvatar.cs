@@ -171,7 +171,7 @@ namespace PlayerController
 
         public void Move(Vector3 moveDirection)
         {
-            if (data == null )
+            if (data == null || !gameObject.activeInHierarchy)
                 return;
 
             lastMoveDirection = moveDirection;
@@ -189,7 +189,7 @@ namespace PlayerController
 
         public void StartDash()
         {
-            if (data == null || Time.time < canDashAtTime)
+            if (data == null || Time.time < canDashAtTime || !gameObject.activeInHierarchy)
                 return;
 
             if (startDashRoutine != null)
@@ -208,7 +208,7 @@ namespace PlayerController
         public void ReleaseDash()
         {
             // Don't allow release if dash hasn't been charged
-            if (data == null || startDashRoutine == null)
+            if (data == null || startDashRoutine == null || !gameObject.activeInHierarchy)
                 return;
 
             StopCoroutine(startDashRoutine);
