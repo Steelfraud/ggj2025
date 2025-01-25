@@ -15,7 +15,8 @@ namespace PlayerController
         //[Header("References")]
         //public PhysicsMaterial PlayerPhysicsMaterial;
         [Header("Pushing")]
-        public AnimationCurve AddedPushMultiplierAtCollisionVelocity;
+        public AnimationCurve AddedPushMultiplierOnMove;
+        public AnimationCurve AddedPushMultiplierOnDash;
         [Min(0f)] public float PushedCooldown = 0.2f;
 
         [Header("Limits")]

@@ -82,7 +82,7 @@ namespace PlayerController
         {
             if (collision.collider.gameObject.tag == "Player" && collision.collider.TryGetComponent(out PlayerAvatar playerAvatar))
             {
-                (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) = GetCollisionLoser(this, playerAvatar);
+                (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) = ResolvePlayerCollision(this, playerAvatar);
 
                 // If collision loser is null, it didn't have a dashing player
                 if (collisionLoser != null)
@@ -96,7 +96,7 @@ namespace PlayerController
             }
         }
 
-        (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) GetCollisionLoser(PlayerAvatar avatarA, PlayerAvatar avatarB)
+        (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) ResolvePlayerCollision(PlayerAvatar avatarA, PlayerAvatar avatarB)
         {
             if (avatarA.currentVelocity.magnitude > avatarB.currentVelocity.magnitude)
             {
@@ -136,7 +136,7 @@ namespace PlayerController
             Debug.Log("Pushed: " + gameObject.GetInstanceID() + " | Final Force: " + (pushForce.magnitude * pushMultiplier).ToString("F2") + " | Just Multiplier: " + pushMultiplier.ToString("F2") + " | Frame: " + Time.frameCount);
             canPushAtTime = Time.time + data.PushedCooldown;
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
-            pushMultiplier += data.AddedPushMultiplierAtCollisionVelocity.Evaluate(pushForce.magnitude);
+            pushMultiplier += pusher.isDashing ? data.AddedPushMultiplierOnDash.Evaluate(pushForce.magnitude) : data.AddedPushMultiplierOnMove.Evaluate(pushForce.magnitude);
 
             OnAnyPlayerPushed?.Invoke(this, pusher, pushForce);
         }
