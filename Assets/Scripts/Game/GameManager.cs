@@ -116,16 +116,16 @@ public class GameManager : Singleton<GameManager>
         highestPlayerCount = 0;
         int playerIndex = 0;
 
-        foreach (InputDevice device in InputSystem.devices) 
-        {
-            if (device.name.Contains("Mouse")) // this is called a lazy hack
-            {
-                continue;
-            }
+        //foreach (InputDevice device in InputSystem.devices) 
+        //{
+        //    if (device.name.Contains("Mouse")) // this is called a lazy hack
+        //    {
+        //        continue;
+        //    }
 
-            PlayerInputManager.JoinPlayer(playerIndex++, pairWithDevice: device);
-            Debug.Log("device name: " + device.description);
-        }
+        //    PlayerInputManager.JoinPlayer(playerIndex++, pairWithDevice: device);
+        //    Debug.Log("device name: " + device.description);
+        //}
 
         PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;        
     }

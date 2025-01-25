@@ -41,7 +41,7 @@ namespace PlayerController
 
         private void OnDestroy()
         {
-            CustomCamera.Instance.RemoveFromTargetGroup(transform);
+            //CustomCamera.Instance.RemoveFromTargetGroup(transform);
         }
 
         public void Move(Vector3 moveDirection)
