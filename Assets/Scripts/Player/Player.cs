@@ -63,7 +63,7 @@ namespace PlayerController
         {
             if (ultimateFormEnabled && collision.gameObject.GetComponent<Rigidbody>())
             {
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(UltimateForce * transform.forward, ForceMode.VelocityChange);
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(UltimateForce * (collision.transform.position - transform.position), ForceMode.VelocityChange);
             }
         }
 
@@ -114,13 +114,18 @@ namespace PlayerController
             releaseDashRoutine = StartCoroutine(ReleaseDashRoutine());
         }
 
-        public IEnumerator UltimateForm(float durationSeconds, float force)
+        public void TriggerUltimateForm(float durationSeconds, float force)
         {
             UltimateForce = force;
+
+            StartCoroutine(UltimateForm(durationSeconds));
+        }
+
+        IEnumerator UltimateForm(float durationSeconds)
+        {
             ultimateFormEnabled = true;
 
             yield return new WaitForSeconds(durationSeconds);
-
             ultimateFormEnabled = false;
         }
 

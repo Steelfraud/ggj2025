@@ -5,8 +5,6 @@ using UnityEngine;
 public class UltimatePickUp : PlayerPickUpObjectBase
 {
     [SerializeField]
-    private float ultimateScale = 3f;
-    [SerializeField]
     private float ultimateForce = 10f;
     [SerializeField]
     private float durationSeconds = 10f;
@@ -15,7 +13,7 @@ public class UltimatePickUp : PlayerPickUpObjectBase
     {
         if (player.ultimateFormEnabled) return;
 
-        StartCoroutine(player.UltimateForm(durationSeconds, ultimateForce));
+        player.TriggerUltimateForm(durationSeconds, ultimateForce);
         base.ApplyEffect(player);
     }
 }

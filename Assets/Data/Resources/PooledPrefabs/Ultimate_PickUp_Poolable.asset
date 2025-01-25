@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd5012851f50af4a861d0828e5ae9e3, type: 3}
   m_Name: Ultimate_PickUp_Poolable
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3769421464357761239, guid: 4a420fddb26166f4691a39d4d4792fb2, type: 3}
+  prefab: {fileID: 3769421464357761239, guid: b5fbac1e517643049b32bd3c05005fb0, type: 3}
   objectsToPreSpawn: 0
   instantiateNewObjectsWhenNeeded: 1
   keepObjectsAliveThroughSceneChanges: 0

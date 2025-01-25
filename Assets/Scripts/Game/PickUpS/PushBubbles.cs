@@ -28,7 +28,7 @@ public class PushBubbles : PlayerPickUpObjectBase
 
         foreach (BubbleBase bubble in bubbles)
         {
-            var newForce = bubble.transform.position - player.transform.position * pushForce;
+            var newForce = (bubble.transform.position - player.transform.position) * pushForce;
             bubble.GetComponent<Rigidbody>().AddForce(newForce, ForceMode.VelocityChange);
         }
 

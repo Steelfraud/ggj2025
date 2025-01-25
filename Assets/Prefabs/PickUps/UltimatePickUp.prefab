@@ -123,8 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MySpawnPosition: {fileID: 0}
-  ultimateScale: 3
-  ultimateForce: 6
+  ultimateForce: 10
   durationSeconds: 10
 --- !u!1001 &7529237655639820235
 PrefabInstance:
