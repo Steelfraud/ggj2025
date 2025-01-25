@@ -12,7 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a266e131eb43743b9c22976a841e2c, type: 3}
   m_Name: Player Avatar Data
   m_EditorClassIdentifier: 
-  AddedDamageMultiplierAtCollisionVelocity:
+  GroundCastLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  AddedPushMultiplierOnMove:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.033333335
+      outSlope: 0.033333335
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 0.1
+      inSlope: 0.033333335
+      outSlope: 0.033333335
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AddedPushMultiplierOnDash:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -36,12 +63,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  DamageCooldown: 0.2
+  PushedCooldown: 0.1
   MoveMaxAngularVelocity: 20
   DashMaxAngularVelocity: 70
-  MovementType: 1
-  MoveForce: 35
   MoveTorque: 5
+  MovePushForceMultiplier: 0.3
   TurnTorqueAtTurnDot:
     serializedVersion: 2
     m_Curve:
