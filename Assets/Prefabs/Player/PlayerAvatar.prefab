@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 8230079864879737104}
   - component: {fileID: 6620542154730230998}
   - component: {fileID: 2604874277213559512}
+  - component: {fileID: 2330703008913933764}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -253,6 +254,7 @@ Transform:
   - {fileID: 8027841887614820854}
   - {fileID: 4423460460637480555}
   - {fileID: 566518024318400579}
+  - {fileID: 4254133760252704106}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &635585095850426401
@@ -270,7 +272,6 @@ MonoBehaviour:
   MyColor:
     PlayerMaterial: {fileID: 0}
     PlayerColor: {r: 0, g: 0, b: 0, a: 0}
-    PlayerIndex: 0
   UltimateForce: 0
   ultimateFormEnabled: 0
   modifierHandler: {fileID: 2604874277213559512}
@@ -278,6 +279,7 @@ MonoBehaviour:
   playerCollider: {fileID: 6620542154730230998}
   playerRenderer: {fileID: 8648371027433508735}
   forceField: {fileID: 7770940797116033232}
+  vfxHandler: {fileID: 2330703008913933764}
   playerRigidbody: {fileID: 8230079864879737104}
 --- !u!54 &8230079864879737104
 Rigidbody:
@@ -339,6 +341,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85eddaa629001a4bbc57edb3b9c7965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyAvatar: {fileID: 635585095850426401}
+--- !u!114 &2330703008913933764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4226995857440471807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377cb4c4ce0db9d44bcdd9e37b299be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VFXParent: {fileID: 4254133760252704106}
 --- !u!1 &5273971503933413576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5259,6 +5275,52 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &6018119450186023493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4254133760252704106}
+  - component: {fileID: 283564990920047370}
+  m_Layer: 0
+  m_Name: EffectsVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4254133760252704106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018119450186023493}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8290830039289243633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &283564990920047370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018119450186023493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b23687b6e4956419dc3f12b31dd174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LockPosition: 0
+  LockRotation: 1
 --- !u!1 &6981672858487970090
 GameObject:
   m_ObjectHideFlags: 0
