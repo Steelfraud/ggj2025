@@ -4,9 +4,13 @@ using UnityEngine;
 public class CustomCamera : Singleton<CustomCamera>
 {
     public CinemachineTargetGroup targetGroup;
+    private GameObject worldCenterObject;
     public void Start()
     {
         CreateSingleton(this, SetDontDestroy);
+        worldCenterObject = new GameObject();
+        worldCenterObject.transform.parent = transform;
+        AddToTargetGroup(worldCenterObject.transform, .75f);
     }
 
     public void AddToTargetGroup(Transform transform, float weigth = 1)
