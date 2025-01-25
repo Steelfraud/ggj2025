@@ -10,11 +10,21 @@ public class BubbleBase : MonoBehaviour
 
     private float destroyAfterSeconds = 5;
     public float initialMoveForce = 3f;
+    private Rigidbody rb;
+    private Collider bubbleCollider;
+    private Animator bubbleAnimator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
-        GetComponent<Rigidbody>().AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            bubbleCollider = GetComponent<Collider>();
+            bubbleAnimator = GetComponentInChildren<Animator>();
+        }
+
+        rb.AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
+        bubbleCollider.enabled = true;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -50,9 +60,9 @@ public class BubbleBase : MonoBehaviour
 
     public IEnumerator DestroyBubble()
     {
-        Animator animator = GetComponentInChildren<Animator>();
-        animator.SetBool("BubbleWasHit", true);
-        yield return new WaitForSeconds(animator.GetCurrentAnimationLength() - 0.1f);
+        bubbleCollider.enabled = false;
+        bubbleAnimator.SetBool("BubbleWasHit", true);
+        yield return new WaitForSeconds(bubbleAnimator.GetCurrentAnimationLength() - 0.1f);
         PoolManager.ReturnObjectToPoolOrDestroyIt(gameObject);
         //Destroy(gameObject);
     }
