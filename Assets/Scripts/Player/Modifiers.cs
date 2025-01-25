@@ -35,7 +35,7 @@ public class ModifierData
     {
         if (this.CombatModifierValues.ContainsKey(valueToGet) == false)
         {
-            return 0f;
+            return baseValue;
         }
 
         float valueToSend = this.CombatModifierValues[valueToGet];
