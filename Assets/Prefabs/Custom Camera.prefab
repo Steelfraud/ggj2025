@@ -219,6 +219,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetDontDestroy: 0
   targetGroup: {fileID: 6292684478432513725}
+  pickupWeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 6.342536
+      outSlope: 6.342536
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.021396395
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.21204598
+      outSlope: 0.21204598
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.061936975
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  worldCenterWeight: 0.3
+  pickupWeightReductionSpeed: 0.2
 --- !u!1 &8507902001503644855
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,11 +337,11 @@ MonoBehaviour:
   FramingMode: 2
   FramingSize: 0.33
   CenterOffset: {x: 0, y: 0}
-  Damping: 4.4
+  Damping: 5
   SizeAdjustment: 1
   LateralAdjustment: 0
   FovRange: {x: 1, y: 179}
-  DollyRange: {x: -100, y: 100}
+  DollyRange: {x: 0, y: 100}
   OrthoSizeRange: {x: 1, y: 1000}
 --- !u!114 &8084680947969946542
 MonoBehaviour:
