@@ -46,7 +46,7 @@ public class BubbleBase : MonoBehaviour
         }
     }
 
-    IEnumerator DestroyBubble()
+    public IEnumerator DestroyBubble()
     {
         Animator animator = GetComponentInChildren<Animator>();
         animator.SetBool("BubbleWasHit", true);
