@@ -22,6 +22,12 @@ namespace PlayerController
         private float defaultDynamicFriction;
         private float canDashAtTime;
 
+        [HideInInspector]
+        public float UltimateForce;
+        [HideInInspector]
+        public bool ultimateFormEnabled;
+
+
         void OnValidate()
         {
             playerRigidbody = GetComponent<Rigidbody>();
@@ -42,6 +48,14 @@ namespace PlayerController
         private void OnDestroy()
         {
             //CustomCamera.Instance.RemoveFromTargetGroup(transform);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (ultimateFormEnabled && collision.gameObject.GetComponent<Rigidbody>())
+            {
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(UltimateForce * transform.forward, ForceMode.VelocityChange);
+            }
         }
 
         public void Move(Vector3 moveDirection)
@@ -89,6 +103,16 @@ namespace PlayerController
             StopCoroutine(startDashRoutine);
             startDashRoutine = null;
             releaseDashRoutine = StartCoroutine(ReleaseDashRoutine());
+        }
+
+        public IEnumerator UltimateForm(float durationSeconds, float force)
+        {
+            UltimateForce = force;
+            ultimateFormEnabled = true;
+
+            yield return new WaitForSeconds(durationSeconds);
+
+            ultimateFormEnabled = false;
         }
 
         IEnumerator MoveRoutine()

@@ -1,3 +1,4 @@
+using PlayerController;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class BubbleBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && !other.gameObject.GetComponent<Player>().ultimateFormEnabled)
         {
             Vector3 direction = other.transform.position - transform.position;
             float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
@@ -43,6 +44,7 @@ public class BubbleBase : MonoBehaviour
         if (!GetComponentInChildren<MeshRenderer>().isVisible)
         {
             StartCoroutine(DestroyBubble());
+            Debug.Log("Destroy");
         }
     }
 
