@@ -16,6 +16,7 @@ public class StickyPickUp : PlayerPickUpObjectBase
             if (otherPlayer != player)
             {
                 otherPlayer.PlayerModifierHandler.AddModifier(new BasicModifierSource(modifierDataEnemies));
+                otherPlayer.Freeze();
             }
         }
         base.ApplyEffect(player);

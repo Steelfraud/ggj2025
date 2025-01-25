@@ -19,6 +19,7 @@ namespace PlayerController
         [SerializeField] private PlayerAvatarData data;
         [SerializeField] private Collider playerCollider;
         [SerializeField] private MeshRenderer playerRenderer;
+        [SerializeField] private ForceField forceField;
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody; public Rigidbody PlayerRigidbody { get { return playerRigidbody; } }
 
@@ -203,6 +204,7 @@ namespace PlayerController
         IEnumerator UltimateForm(float durationSeconds)
         {
             ultimateFormEnabled = true;
+            forceField.EnableField(durationSeconds);
             yield return new WaitForSeconds(durationSeconds);
             ultimateFormEnabled = false;
         }
