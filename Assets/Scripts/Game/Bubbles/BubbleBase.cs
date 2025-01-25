@@ -14,15 +14,15 @@ public class BubbleBase : MonoBehaviour
     private Collider bubbleCollider;
     private Animator bubbleAnimator;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        bubbleCollider = GetComponent<Collider>();
-        bubbleAnimator = GetComponent<Animator>();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+            bubbleCollider = GetComponent<Collider>();
+            bubbleAnimator = GetComponentInChildren<Animator>();
+        }
+
         rb.AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
         bubbleCollider.enabled = true;
     }
