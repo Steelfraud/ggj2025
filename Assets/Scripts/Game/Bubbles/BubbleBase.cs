@@ -8,28 +8,23 @@ public class BubbleBase : MonoBehaviour
     private float force = 1000f;
 
     private float destroyAfterSeconds = 5;
+    public float initialMoveForce = 3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(100 * transform.forward);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<Rigidbody>().AddForce(initialMoveForce * transform.forward, ForceMode.VelocityChange);
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("collision");
             Vector3 direction = other.transform.position - transform.position;
             float newForce = other.gameObject.GetComponent<Rigidbody>().linearVelocity.magnitude + force;
             other.collider.GetComponent<Rigidbody>().AddForce(newForce * direction, ForceMode.VelocityChange);
-            Destroy(gameObject);
+
+            StartCoroutine(DestroyBubble());
         }
     }
 
@@ -45,9 +40,17 @@ public class BubbleBase : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyAfterSeconds);
 
-        if (!GetComponent<MeshRenderer>().isVisible)
+        if (!GetComponentInChildren<MeshRenderer>().isVisible)
         {
-            Destroy(gameObject);
+            StartCoroutine(DestroyBubble());
         }
+    }
+
+    IEnumerator DestroyBubble()
+    {
+        Animator animator = GetComponentInChildren<Animator>();
+        animator.SetBool("BubbleWasHit", true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimationLength() - 0.1f);
+        Destroy(gameObject);
     }
 }
