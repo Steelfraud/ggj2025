@@ -7,6 +7,8 @@ namespace PlayerController
     public class PlayerAvatarFX : MonoBehaviour
     {
         [SerializeField] private ParticleSystem dashChargeParticles;
+        [SerializeField] private ParticleSystem dashShockwaveParticles;
+        [SerializeField] private ParticleSystem dashingParticles;
 
         [HideInInspector, SerializeField] private PlayerAvatar playerAvatar;
 
@@ -23,7 +25,10 @@ namespace PlayerController
 
             playerAvatar.OnDashStart += OnDashStart;
             playerAvatar.OnDashRelease += OnDashRelease;
+            playerAvatar.OnDashEnd += OnDashEnd;
         }
+
+        
 
         void OnDisable()
         {
@@ -31,13 +36,16 @@ namespace PlayerController
 
             playerAvatar.OnDashStart -= OnDashStart;
             playerAvatar.OnDashRelease -= OnDashRelease;
+            playerAvatar.OnDashEnd -= OnDashEnd;
         }
 
         void InitializeFX()
         {
             fxBase = new GameObject("FX Base").transform;
             dashChargeParticles.transform.SetParent(fxBase.transform);
+            dashShockwaveParticles.transform.SetParent(fxBase.transform);
             dashChargeParticles.transform.localPosition = Vector3.down * 0.5f;
+            dashShockwaveParticles.transform.localPosition = Vector3.zero;
         }
 
         void Update()
@@ -48,12 +56,21 @@ namespace PlayerController
 
         void OnDashStart()
         {
+            dashingParticles.Play();
             dashChargeParticles.Play();
         }
 
         void OnDashRelease()
         {
             dashChargeParticles.Stop();
+            dashingParticles.Play();
+            dashShockwaveParticles.transform.rotation = Quaternion.LookRotation(Vector3.Cross(Vector3.up, -playerAvatar.PlayerRigidbody.angularVelocity));
+            dashShockwaveParticles.Play();
+        }
+
+        void OnDashEnd()
+        {
+            dashingParticles.Stop();
         }
     }
 }
