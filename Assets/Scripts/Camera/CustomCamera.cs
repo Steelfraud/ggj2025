@@ -1,9 +1,13 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class CustomCamera : MonoBehaviour
+public class CustomCamera : Singleton<CustomCamera>
 {
     public CinemachineTargetGroup targetGroup;
+    public void Start()
+    {
+        CreateSingleton(this, SetDontDestroy);
+    }
 
     public void AddToTargetGroup(Transform transform)
     {
