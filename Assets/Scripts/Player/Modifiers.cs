@@ -9,6 +9,7 @@ public class ModifierData
     public NumberModifierDictionary CombatModifierValues;
     public int ModifierPriority = 0;
     public float TimeToStay = 0f;
+    public ModificationType ModificationType = ModificationType.Addition;
 
     [Header("Value modifiers")]
     public bool AllowNegativeValues = true;
@@ -29,8 +30,25 @@ public class ModifierData
 
         return valueToSend;
     }
-        
- }
+
+    public float GetModifierValue(ModifiedValueNumber valueToGet, float baseValue)
+    {
+        if (this.CombatModifierValues.ContainsKey(valueToGet) == false)
+        {
+            return 0f;
+        }
+
+        float valueToSend = this.CombatModifierValues[valueToGet];
+
+        if (this.AllowNegativeValues == false && valueToSend < 0)
+        {
+            valueToSend = 0;
+        }
+
+        return baseValue * valueToSend;
+    }
+
+}
 
 public class BasicModifierSource
 {
@@ -40,7 +58,7 @@ public class BasicModifierSource
 
     public bool TimedOut => TimeStayed >= baseData.TimeToStay;
     public bool IsTimedModifier => baseData.TimeToStay > 0f;
-    
+    public ModificationType ModificationType => baseData.ModificationType;
 
     protected ModifierData baseData;
     protected float defaultMultiplier = 1f;
@@ -65,6 +83,11 @@ public class BasicModifierSource
         return this.baseData.GetModifierValue(valueToGet) * GetDefaultMultiplier();
     }
 
+    public float GetMultiplierModifierValue(ModifiedValueNumber valueToGet, float baseValue)
+    {
+        return this.baseData.GetModifierValue(valueToGet) * GetDefaultMultiplier();
+    }
+
     protected virtual float GetDefaultMultiplier()
     {
         return this.defaultMultiplier;
@@ -75,7 +98,7 @@ public class BasicModifierSource
 [System.Serializable]
 public class NumberModifierDictionary : SerializableDictionaryBase<ModifiedValueNumber, float> { }
 
-public enum StatModificationType
+public enum ModificationType
 {
     None,
     Addition,

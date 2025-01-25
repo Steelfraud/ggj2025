@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     {
         public Material PlayerMaterial;
         public Color PlayerColor;
+        public int PlayerIndex;
     }
 
     [Header("References")]
@@ -225,10 +226,13 @@ public class GameManager : Singleton<GameManager>
             availableColors.RemoveAll(x => playerColors.ContainsValue(x));
             colorToSet = availableColors.GetRandomElementFromList();
             playerColors.Add(input.devices[0].deviceId, colorToSet);
+            colorToSet.PlayerIndex = playerColors.Count;
         }
 
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
+
+        UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar);
     }
 
 }
