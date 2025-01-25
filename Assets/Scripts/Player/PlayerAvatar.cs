@@ -32,6 +32,7 @@ namespace PlayerController
         public delegate void PlayerAction();
         public event PlayerAction OnDashStart;
         public event PlayerAction OnDashRelease;
+        public event PlayerAction OnDashEnd;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
         private bool isGrounded; public bool IsGrounded { get { return isGrounded; }}
@@ -294,6 +295,8 @@ namespace PlayerController
 
             isDashing = false;
             releaseDashRoutine = null;
+            
+            OnDashEnd?.Invoke();
         }
     }
 }
