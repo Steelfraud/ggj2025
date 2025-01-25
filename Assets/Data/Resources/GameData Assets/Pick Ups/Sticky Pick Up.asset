@@ -17,3 +17,5 @@ MonoBehaviour:
   PickupPrefab: {fileID: 0}
   PooledPrefabData: {fileID: 11400000, guid: 3d45960f628c9534da14e1fd0b99a991, type: 2}
   ModifiersToApply: []
+  FloatingTextToShow: Sticky!
+  FloatingTextColor: {r: 1, g: 1, b: 1, a: 1}

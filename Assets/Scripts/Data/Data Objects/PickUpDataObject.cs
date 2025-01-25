@@ -11,6 +11,8 @@ public class PickUpDataObject : GameData
     public GameObject PickupPrefab;
     public PooledPrefabData PooledPrefabData;
     public List<ModifierData> ModifiersToApply;
+    public string FloatingTextToShow;
+    public Color FloatingTextColor = Color.white;
 
     public GameObject CreatePickUp()
     {
