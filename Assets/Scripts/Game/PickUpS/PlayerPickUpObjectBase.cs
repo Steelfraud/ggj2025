@@ -36,6 +36,11 @@ public class PlayerPickUpObjectBase : MonoBehaviour
             {
                 player.PlayerModifierHandler.AddModifier(new BasicModifierSource(modifierData));
             }
+
+            if (string.IsNullOrEmpty(myData.FloatingTextToShow) == false)
+            {
+                GameManager.Instance.UI.AddNewFloatingText(myData.FloatingTextToShow, myData.FloatingTextColor, transform.position);
+            }
         }
 
         Debug.Log("I was picked yaaaay :)))");

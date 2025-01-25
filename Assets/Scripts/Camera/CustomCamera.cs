@@ -1,3 +1,4 @@
+using PlayerController;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,6 +45,13 @@ public class CustomCamera : Singleton<CustomCamera>
     private float pushCameraEffectCooldown = 1f;
     private bool canPushCameraEffect = true;
 
+    [SerializeField]
+    private float freezeDuration = 1f;
+    [SerializeField]
+    private float freezeTimeScale = 0.2f;
+
+    [SerializeField]
+    private float targetRadius = 5f;
     public void Start()
     {
         CreateSingleton(this, SetDontDestroy);
@@ -52,23 +60,27 @@ public class CustomCamera : Singleton<CustomCamera>
         worldCenterObject = new GameObject();
         worldCenterObject.transform.parent = transform;
         AddToTargetGroup(worldCenterObject.transform, worldCenterWeight);
-        PlayerController.PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
     }
 
     public void OnDestroy()
     {
-        PlayerController.PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
     }
 
     private void OnPlayerPush(Transform pushed, Transform pusher, Vector3 pushForce)
     {
-        if (pushForce.magnitude < pushCameraEffectLimit)
+        if (pushForce.magnitude < pushCameraEffectLimit || !canPushCameraEffect)
         {
             return;
         }
         canPushCameraEffect = false;
         hitTargetGroup.AddMember(pushed, 1, 1);
-        hitTargetGroup.AddMember(pusher, 1, 1);
+
+        if (pusher.GetComponentInChildren<PlayerAvatar>())
+        {
+            hitTargetGroup.AddMember(pusher, 1, 1);
+        }
         StartCoroutine(FocusOnHit());
     }
 
@@ -84,8 +96,8 @@ public class CustomCamera : Singleton<CustomCamera>
         groupFraming.Damping = 0f;
         cinemachineCamera.Target.TrackingTarget = hitTargetGroup.Transform;
         // Focus camera on hit - ignore other targets
-        Time.timeScale = 0.2f;
-        yield return new WaitForSecondsRealtime(1);
+        Time.timeScale = freezeTimeScale;
+        yield return new WaitForSecondsRealtime(freezeDuration);
         groupFraming.Damping = oldDamping;
         cinemachineCamera.Target.TrackingTarget = targetGroup.Transform;
         hitTargetGroup.Targets.Clear();
@@ -102,7 +114,7 @@ public class CustomCamera : Singleton<CustomCamera>
         {
             return;
         }
-        targetGroup.AddMember(t, weigth, 4);
+        targetGroup.AddMember(t, weigth, targetRadius);
     }
 
     public void AddPickupToTargetGroup(Transform t)

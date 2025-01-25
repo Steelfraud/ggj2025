@@ -297,10 +297,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  worldCenterWeight: 0.3
-  pickupWeightReductionSpeed: 0.2
-  pushCameraEffectLimit: 50
+  worldCenterWeight: 0.1
+  pickupWeightReductionSpeed: 0.1
+  pushCameraEffectLimit: 30
   pushCameraEffectCooldown: 3
+  freezeDuration: 1
+  freezeTimeScale: 0.1
+  targetRadius: 5
 --- !u!1 &8507902001503644855
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,9 +394,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FramingMode: 2
-  FramingSize: 0.5
+  FramingSize: 0.8
   CenterOffset: {x: 0, y: 0}
-  Damping: 5
+  Damping: 1
   SizeAdjustment: 1
   LateralAdjustment: 0
   FovRange: {x: 1, y: 179}
@@ -417,7 +420,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 100, z: -20}
+  FollowOffset: {x: 0, y: 30, z: -1}
 --- !u!1 &9001781531589897619
 GameObject:
   m_ObjectHideFlags: 0
