@@ -10,7 +10,7 @@ public class PushBubbles : PlayerPickUpObjectBase
     [SerializeField]
     private float pushForce = 5f;
 
-    protected override void ApplyEffect(Player player)
+    protected override void ApplyEffect(PlayerAvatar player)
     {
         Vector3 p1 = transform.position;
         RaycastHit[] hits = Physics.SphereCastAll(p1, blastRadius, transform.forward, 10f);

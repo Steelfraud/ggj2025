@@ -9,7 +9,7 @@ public class KillField : MonoBehaviour
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.KillPlayer(other.GetComponent<Player>());
+                GameManager.Instance.KillPlayer(other.GetComponent<PlayerAvatar>());
             }
             else
             {

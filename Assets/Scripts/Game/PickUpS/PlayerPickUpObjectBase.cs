@@ -10,7 +10,7 @@ public class PlayerPickUpObjectBase : MonoBehaviour
     {
         if (collision.tag == "Player") // or change to whatever we use to detect player
         {
-            ApplyEffect(collision.GetComponent<Player>());
+            ApplyEffect(collision.GetComponent<PlayerAvatar>());
         }
     }
 
@@ -26,7 +26,7 @@ public class PlayerPickUpObjectBase : MonoBehaviour
         PoolManager.ReturnObjectToPoolOrDestroyIt(gameObject);
     }
 
-    protected virtual void ApplyEffect(Player player)
+    protected virtual void ApplyEffect(PlayerAvatar player)
     {
         Debug.Log("I was picked yaaaay :)))");
         DestroyPickup();
