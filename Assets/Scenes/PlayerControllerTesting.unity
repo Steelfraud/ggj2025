@@ -531,7 +531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1557257288
 AudioListener:
   m_ObjectHideFlags: 0
@@ -770,12 +770,16 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4758246739711487058, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.861748
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758246739711487058, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.60314
+      value: 20.603136
       objectReference: {fileID: 0}
     - target: {fileID: 4758246739711487058, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.223965
+      value: -27.22396
       objectReference: {fileID: 0}
     - target: {fileID: 5165364116390701852, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -792,6 +796,10 @@ PrefabInstance:
     - target: {fileID: 5197649503318429000, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_JoinAction.m_Action.m_Name
       value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777726262605004182, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6772158374378594723, guid: a56824c627fa4774c889b1dd851e986f, type: 3}
       propertyPath: m_Name
