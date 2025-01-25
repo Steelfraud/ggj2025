@@ -1,5 +1,6 @@
 using PlayerController;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerPickUpObjectBase : MonoBehaviour
 {
@@ -13,9 +14,15 @@ public class PlayerPickUpObjectBase : MonoBehaviour
         }
     }
 
+    public void OnEnable()
+    {
+        CustomCamera.Instance.AddToTargetGroup(transform, 0.3f);
+    }
+
     public void DestroyPickup()
     {
         GameManager.Instance.RemovePickUp(this);
+        CustomCamera.Instance.RemoveFromTargetGroup(transform);
         PoolManager.ReturnObjectToPoolOrDestroyIt(gameObject);
     }
 

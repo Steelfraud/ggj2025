@@ -29,7 +29,8 @@ public class BubbleSpawner : MonoBehaviour
         for (int i = 1; i < amount; i++)
         {
             Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0.5f, Random.Range(-spawnRangeZ, spawnRangeZ));
-            Instantiate(bubblePrefabs.GetRandomElementFromList(), spawnPosition, transform.rotation);
+            PoolManager.Instance.GetPooledObject(bubblePrefabs.GetRandomElementFromList().gameObject, new PoolObjectSettings() { positionToSet = spawnPosition, rotationToSet = transform.rotation, timeBeforeReturningToPool = 60f });
+            //Instantiate(bubblePrefabs.GetRandomElementFromList(), spawnPosition, transform.rotation);
         }
     }
 

@@ -1281,10 +1281,8 @@ public class PoolManager : MonoBehaviour
 
             TypePoolManager typePoolManager = new TypePoolManager();
 
-            typePoolManager.PooledPrefabDataToUse = new PooledPrefabData
-            {
-                prefab = prefabToUse
-            };
+            typePoolManager.PooledPrefabDataToUse = ScriptableObject.CreateInstance<PooledPrefabData>();
+            typePoolManager.PooledPrefabDataToUse.prefab = prefabToUse;
 
             this.activePoolManagers.Add(typePoolManager);
             this.poolPrefabManagerDictionary.Add(prefabToUse, typePoolManager);

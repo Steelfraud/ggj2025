@@ -179,8 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c66f88f4fe52346a5056e82f7684c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyColor:
+    PlayerMaterial: {fileID: 0}
+    PlayerColor: {r: 0, g: 0, b: 0, a: 0}
   data: {fileID: 11400000, guid: a4ebf7fb1fc09d143885cabdeca79625, type: 2}
   playerCollider: {fileID: 6388073089346514284}
+  playerRenderer: {fileID: 2544141025305293958}
   playerRigidbody: {fileID: 6471917593463050384}
 --- !u!54 &6471917593463050384
 Rigidbody:
