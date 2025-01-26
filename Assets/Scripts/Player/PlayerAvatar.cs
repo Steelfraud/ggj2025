@@ -155,6 +155,7 @@ namespace PlayerController
             canPushAtTime = Time.time + data.PushedCooldown;
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
             pushMultiplier += addedPushMultiplier;
+            CancelDash();
 
             OnPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
             OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
@@ -214,6 +215,22 @@ namespace PlayerController
             StopCoroutine(startDashRoutine);
             startDashRoutine = null;
             releaseDashRoutine = StartCoroutine(ReleaseDashRoutine());
+        }
+
+        public void CancelDash()
+        {
+            if (startDashRoutine != null)
+            {
+                StopCoroutine(startDashRoutine);
+                startDashRoutine = null;
+            }
+            if (releaseDashRoutine != null)
+            {
+                StopCoroutine(releaseDashRoutine);
+                releaseDashRoutine = null;
+            }
+
+            playerRigidbody.angularVelocity = Vector3.zero;
         }
 
         public void TriggerUltimateForm(float durationSeconds, float force)

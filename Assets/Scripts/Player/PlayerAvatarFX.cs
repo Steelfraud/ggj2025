@@ -34,7 +34,10 @@ namespace PlayerController
 
         void OnDisable()
         {
-            Destroy(fxBase.gameObject);
+            if (fxBase != null)
+            {
+                Destroy(fxBase.gameObject);
+            }
 
             playerAvatar.OnDashStart -= OnDashStart;
             playerAvatar.OnDashRelease -= OnDashRelease;
@@ -82,6 +85,8 @@ namespace PlayerController
 
         void OnPushed(Transform pushed, Transform pusher, Vector3 pushForce)
         {
+            dashChargeParticles.Stop();
+            dashingParticles.Stop();
             pushedParticles.Play();
         }
     }
