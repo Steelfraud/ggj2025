@@ -158,8 +158,9 @@ MonoBehaviour:
     TimeToStay: 5
     ModificationType: 1
     ModifierPooledVFX: {fileID: 0}
-    ModifierVFXPrefab: {fileID: 0}
+    ModifierVFXPrefab: {fileID: 1329223543870707305, guid: 8d40e67ba53655144bdc9e014ef418ab, type: 3}
     AllowNegativeValues: 1
+  stickyVFX: {fileID: 0}
 --- !u!1001 &4544201268789688503
 PrefabInstance:
   m_ObjectHideFlags: 0
