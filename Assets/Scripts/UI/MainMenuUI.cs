@@ -15,11 +15,18 @@ public class MainMenuUI : MonoBehaviour
     {
         MusicPlaylistManager.Instance.ChangePlaylist("Menu");
         DataManager.Instance.playerColors.Clear();
+        Invoke("playIntroSound", 1f);
+    }
+
+    void playIntroSound()
+    {
+        SoundEffectManager.instance.PlaySoundEffect("Announcer_Bubbler2000");
     }
 
     public void StartGame()
     {
         CharacterSelect.SetActive(true);
+        SoundEffectManager.instance.PlaySoundEffect("Announcer_Choose");
         gameObject.SetActive(false);
     }
 
@@ -37,5 +44,4 @@ public class MainMenuUI : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
