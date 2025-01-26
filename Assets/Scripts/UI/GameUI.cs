@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
+    public GameObject TimerPanel;
     public TextMeshProUGUI TimerLabel;
     public GameObject GameEndPanelParent;
     public TextMeshProUGUI WinnerText;
     public FloatingTextHandler TextHandler;
     public Image portraitImage;
     public Image playerBackground;
+    public GameObject playerPanelsParent;
 
     public List<PlayerPanel> AvailablePlayerPanels;
 
@@ -50,13 +52,16 @@ public class GameUI : MonoBehaviour
         {
             portraitImage.sprite = portrait;
         }
-        
+
         playerBackground.color = color;
     }
 
     public void ToggleGameEndPanel(bool setTo)
     {
         GameEndPanelParent.SetActive(setTo);
+
+        playerPanelsParent.gameObject.SetActive(!setTo);
+        TimerPanel.gameObject.SetActive(!setTo);
     }
 
     public void AddNewFloatingText(string text, Color textColor, Vector3 position)

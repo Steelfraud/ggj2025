@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -149,7 +150,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            winnerText = "Survived for:\n" + Mathf.RoundToInt(gameTimer) + " seconds";
+            winnerText = "Survived: " + Mathf.RoundToInt(gameTimer) + "s";
             UI.ShowGameEnd(winnerText, null, Color.black);
         }
 
@@ -160,6 +161,8 @@ public class GameManager : Singleton<GameManager>
         {
             Spawner.enabled = false;
         }
+
+        Invoke(nameof(RestartLevel), 4);
     }
 
     private void CreatePickUp()
@@ -223,4 +226,9 @@ public class GameManager : Singleton<GameManager>
         UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar, colorToSet.PlayerPortrait);
     }
 
+    public void RestartLevel()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.buildIndex);
+    }
 }
