@@ -88,9 +88,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6519593831662860390, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 34.8167
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519593831662860390, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 161.5331
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519593831662860390, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519593831662860390, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 7727305281308065762, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
       propertyPath: m_Name
-      value: CharacterShow_base Variant
+      value: CharacterShow_base Alex
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterShow_base Ash
       objectReference: {fileID: 0}
+    - target: {fileID: 2483447885996149507, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 47.5537
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483447885996149507, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140.4482
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483447885996149507, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483447885996149507, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 44
+      objectReference: {fileID: 0}
     - target: {fileID: 8127926864090240040, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
