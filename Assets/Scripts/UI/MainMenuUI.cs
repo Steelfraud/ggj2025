@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     public GameObject CreditsParent;
+    public GameObject CharacterSelect;
 
     private void Awake()
     {
@@ -17,7 +18,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        CharacterSelect.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void ShowCredits()

@@ -51,21 +51,25 @@ MonoBehaviour:
     PlayerModel: {fileID: 8385860222230125465, guid: 673562bddf5426e47bedebde1c38b639, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: c519167c391c32940b2e8b585e20c574, type: 3}
     AudioID: Alex_
+    UIPrefab: {fileID: 1382707940098870407, guid: 5bb6c9768183f354fad4ca13afe6e163, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: fc5f2926d963d6d49944a6eea553f74b, type: 2}
     PlayerColor: {r: 0.9622642, g: 0.39489147, b: 0.9038612, a: 1}
     PlayerModel: {fileID: 5875018485656519977, guid: a581c07cee1b1e54b9dc2b4af3242fd0, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 5baf56c21fcbf4e4d90e1c252f330e42, type: 3}
     AudioID: Ash_
+    UIPrefab: {fileID: 6109963846448031084, guid: 62af7aa30b4bf6a4b93eb9ab9668c58f, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: 86039e1e92a24fe48bdb00d841e491c9, type: 2}
     PlayerColor: {r: 0.8867924, g: 0.19529204, b: 0.18823427, a: 1}
     PlayerModel: {fileID: 1339782667642637655, guid: 00d26544d54b50b42b3c0f9fc5a48f4f, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 8e2699ad823b7414a84fd2e3c8540084, type: 3}
     AudioID: Brody_
+    UIPrefab: {fileID: 4821212651835513010, guid: c3845af620580f641b1cbc946468b7e8, type: 3}
   - PlayerMaterial: {fileID: 2100000, guid: dd2678091f5772a4bba1a306e76ed9e4, type: 2}
     PlayerColor: {r: 0.39535922, g: 0.8207547, b: 0.127759, a: 1}
     PlayerModel: {fileID: 7710569486385852344, guid: 3192918aa9c95fd4eac6542a8ff03074, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 0184eddff8edf0146a99bf9c4d67a1eb, type: 3}
     AudioID: Jess_
+    UIPrefab: {fileID: 8983682438946440571, guid: a465c0120bb0b9642b73dfe9aec71758, type: 3}
 --- !u!1 &1303779278913225956
 GameObject:
   m_ObjectHideFlags: 0
