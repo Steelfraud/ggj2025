@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     private List<PickUpSpawnPosition> pickUpSpawns = new List<PickUpSpawnPosition>(); 
     private List<PlayerPickUpObjectBase> activePickUps = new List<PlayerPickUpObjectBase>();
     public List<PlayerAvatar> activePlayers = new List<PlayerAvatar>();
-    private List<Player> joinedPlayers = new List<Player>();
+    public List<Player> joinedPlayers = new List<Player>();
     private List<Transform> usedSpawnPositions = new List<Transform>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -111,6 +111,7 @@ public class GameManager : Singleton<GameManager>
         UI.ToggleGameEndPanel(false);
 
         MusicPlaylistManager.Instance.ChangePlaylist("Game");
+        SoundEffectManager.instance.PlaySoundEffect("Announcer_BobbleOn");
 
         if (TimeBeforeFirstPickUp > 0)
         {

@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c888ae4dd9b90d4688d367ed1523ed8, type: 3}
-  m_Name: Menu
+  m_Script: {fileID: 11500000, guid: a28d3dcf706b66643b7954718e2b080f, type: 3}
+  m_Name: Announcer_LockIn
   m_EditorClassIdentifier: 
-  identifier: Menu
-  playList:
-  - artistName: 
-    clipToPlay: {fileID: 8300000, guid: af8964baa1ac88b40b0b5383737a0f7e, type: 3}
-    trackName: 
-    trackVolume: 0.1
-  shuffle: 0
-  trackChangeTime: 0
+  clipToPlay: {fileID: 8300000, guid: 829e6be79f39a31469ee6c3c5e75f110, type: 3}
+  effectVolume: 1
