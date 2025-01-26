@@ -11,7 +11,9 @@ namespace PlayerController
         [SerializeField] private ParticleSystem dashShockwaveParticles;
         [SerializeField] private ParticleSystem dashingParticles;
         [SerializeField] private ParticleSystem pushedParticles;
+        [SerializeField] private ParticleSystem deathParticles;
         [SerializeField] private DecalProjector heightShadowDecal;
+        
 
         [HideInInspector, SerializeField] private PlayerAvatar playerAvatar;
 
@@ -29,6 +31,7 @@ namespace PlayerController
             playerAvatar.OnDashStart.AddListener(OnDashStart);
             playerAvatar.OnDashRelease.AddListener(OnDashRelease);
             playerAvatar.OnDashEnd.AddListener(OnDashEnd);
+            playerAvatar.OnDeath.AddListener(OnDeath);
             playerAvatar.OnPushed += OnPushed;
         }
 
@@ -42,6 +45,7 @@ namespace PlayerController
             playerAvatar.OnDashStart.RemoveListener(OnDashStart);
             playerAvatar.OnDashRelease.RemoveListener(OnDashRelease);
             playerAvatar.OnDashEnd.RemoveListener(OnDashEnd);
+            playerAvatar.OnDeath.RemoveListener(OnDeath);
             playerAvatar.OnPushed -= OnPushed;
         }
 
@@ -94,6 +98,13 @@ namespace PlayerController
             dashChargeParticles.Stop();
             dashingParticles.Stop();
             pushedParticles.Play();
+        }
+
+        public void OnDeath()
+        {
+            deathParticles.Play();
+            deathParticles.transform.SetParent(null);
+            deathParticles.transform.rotation = Quaternion.identity;
         }
     }
 }

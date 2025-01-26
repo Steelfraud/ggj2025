@@ -93,6 +93,7 @@ public class GameManager : Singleton<GameManager>
     public void KillPlayer(PlayerAvatar player)
     {
         player.PlayerSFXHandler.PlaySoundEffect("Death");
+        player.Kill();
         activePlayers.Remove(player);
         player.gameObject.SetActive(false);
         CustomCamera.Instance.RemoveFromTargetGroup(player.transform);
