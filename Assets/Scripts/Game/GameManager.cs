@@ -159,8 +159,9 @@ public class GameManager : Singleton<GameManager>
 
         if (activePlayers.Count == 1)
         {
-            winnerText = "Player " + activePlayers[0].MyColor.PlayerIndex;
-            activePlayers[0].MyColor.PlayerWins++;
+            PlayerData data = DataManager.Instance.GetPlayer(activePlayers[0].MyColor);
+            winnerText = "Player " + data.PlayerIndex;
+            data.PlayerWins++;
             UI.ShowGameEnd(winnerText, activePlayers[0].MyColor.PlayerPortrait, activePlayers[0].MyColor.PlayerColor);
         }
         else
@@ -235,11 +236,12 @@ public class GameManager : Singleton<GameManager>
         usedSpawnPositions.Add(spawnPos);
 
         PlayerVisualInfo colorToSet = DataManager.Instance.GetPlayerColor(input.devices[0].deviceId);
+        PlayerData player = DataManager.Instance.GetPlayer(colorToSet);
 
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
 
-        UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar, colorToSet.PlayerPortrait);
+        UI.AddNewPlayerUI("Player " + player.PlayerIndex, newPlayer.SpawnedAvatar, colorToSet.PlayerPortrait);
         newPlayer.SpawnedAvatar.PlayerSFXHandler.PlaySoundEffect("Select");
     }
 

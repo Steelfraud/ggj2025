@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterSelectParent: {fileID: 7590099664250145143}
+  EmptySelect: {fileID: 5763889867339391222, guid: 9b0ed4c8d7d14a24b847d5194f32060b, type: 3}
 --- !u!114 &388309828966763501
 MonoBehaviour:
   m_ObjectHideFlags: 0

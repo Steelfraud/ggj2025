@@ -8,6 +8,7 @@ using UnityEngine.Windows;
 public class CharacterSelectUI : MonoBehaviour
 {
     public GameObject CharacterSelectParent;
+    public GameObject EmptySelect;
 
     private List<CharacterUI> characterUIs = new List<CharacterUI>();
     
@@ -128,18 +129,27 @@ public class CharacterSelectUI : MonoBehaviour
         List<PlayerData> list = new List<PlayerData>(DataManager.Instance.activePlayers);
         list = list.OrderByDescending(x => x.PlayerIndex).ToList();
 
-        foreach (PlayerData data in list)
+        for (int i = 0; i < 4; i++)
         {
-            PlayerVisualInfo visuals = DataManager.Instance.GetCharacterVisuals(data.CharacterIndex);
-
-            CharacterUI ui = Instantiate(visuals.UIPrefab, CharacterSelectParent.transform).GetComponent<CharacterUI>();
-            characterUIs.Add(ui);
-            ui.PlayerLabel.text = "Player " + data.PlayerIndex;
-            ui.AttachedPlayer = data;
-
-            if (data.PlayerIndex == newPlayerIndex)
+            if (i < list.Count)
             {
-                ui.StartAnimation();
+                PlayerData data = list[i];
+                PlayerVisualInfo visuals = DataManager.Instance.GetCharacterVisuals(data.CharacterIndex);
+
+                CharacterUI ui = Instantiate(visuals.UIPrefab, CharacterSelectParent.transform).GetComponent<CharacterUI>();
+                characterUIs.Add(ui);
+                ui.PlayerLabel.text = "Player " + data.PlayerIndex;
+                ui.AttachedPlayer = data;
+
+                if (data.PlayerIndex == newPlayerIndex)
+                {
+                    ui.StartAnimation();
+                }
+            }
+            else
+            {
+                CharacterUI ui = Instantiate(EmptySelect, CharacterSelectParent.transform).GetComponent<CharacterUI>();
+                characterUIs.Add(ui);
             }
         }
     }
