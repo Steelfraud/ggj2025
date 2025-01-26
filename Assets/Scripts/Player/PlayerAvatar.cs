@@ -38,6 +38,7 @@ namespace PlayerController
         public UnityEvent OnDashRelease;
         public UnityEvent OnDashEnd;
         public UnityEvent WasPushed;
+        public UnityEvent OnDeath;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
         private bool isGrounded; public bool IsGrounded { get { return isGrounded; } }
@@ -163,6 +164,11 @@ namespace PlayerController
         {
             playerRigidbody.linearVelocity = Vector3.zero;
             playerRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        public void Kill()
+        {
+            OnDeath.Invoke();
         }
 
         public void Push(Transform pusher, Vector3 pushForce, float addedPushMultiplier)
