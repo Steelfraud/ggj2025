@@ -61,7 +61,13 @@ namespace PlayerController
         void Update()
         {
             fxBase.position = playerAvatar.transform.position;
-            dashChargeParticles.transform.rotation = Quaternion.LookRotation(Vector3.Cross(Vector3.up, -playerAvatar.PlayerRigidbody.angularVelocity));
+
+            Vector3 newDirection = Vector3.Cross(Vector3.up, -playerAvatar.PlayerRigidbody.angularVelocity);
+
+            if (newDirection != Vector3.zero)
+            {
+                dashChargeParticles.transform.rotation = Quaternion.LookRotation(newDirection);
+            }
         }
 
         void OnDashStart()

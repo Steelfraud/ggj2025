@@ -143,15 +143,17 @@ public class GameManager : Singleton<GameManager>
 
         if (activePlayers.Count == 1)
         {
-            winnerText = "Winner:\nPlayer " + activePlayers[0].MyColor.PlayerIndex;
+            winnerText = "Player " + activePlayers[0].MyColor.PlayerIndex;
             activePlayers[0].MyColor.PlayerWins++;
+            UI.ShowGameEnd(winnerText, activePlayers[0].MyColor.PlayerPortrait, activePlayers[0].MyColor.PlayerColor);
         }
         else
         {
             winnerText = "Survived for:\n" + Mathf.RoundToInt(gameTimer) + " seconds";
+            UI.ShowGameEnd(winnerText, null, Color.black);
         }
 
-        UI.ShowGameEnd(winnerText);
+        
         PlayerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
 
         if (Spawner != null)
