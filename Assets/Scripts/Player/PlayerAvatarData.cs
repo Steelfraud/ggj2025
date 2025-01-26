@@ -13,6 +13,7 @@ namespace PlayerController
         public AnimationCurve AddedPushMultiplierOnDash;
         [Range(0f, 10f)] public float MovePushForceMultiplier = 1;
         [Range(0f, 10f)] public float DashPushForceMultiplier = 1;
+        [Range(0f, 1f)] public float pushDownForceMultiplier = 0.5f;
         [Min(0f)] public float PushedCooldown = 0.2f;
 
         [Header("Limits")]

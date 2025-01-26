@@ -55,17 +55,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Metallic: -16.09
+    - _Metallic: -0.21
     - _Power: 88.67
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 12.4
+    - _Smoothness: 0.9
     - _Tiling: 10
     - _emis: 0.2
     m_Colors:
-    - _BaseColor: {r: 0.475, g: 0.37382498, b: 0.4539219, a: 1}
+    - _BaseColor: {r: 0.4627451, g: 0.28235295, b: 0.27450982, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 0}
     - _Emission: {r: 1.4157313, g: 0.8677767, b: 0, a: 1}
-    - _WireColor: {r: 0.27537313, g: 0.29464924, b: 0.36900002, a: 1}
+    - _WireColor: {r: 0.56078434, g: 0.58431375, b: 0.6784314, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -305,10 +305,11 @@ MonoBehaviour:
     PlayerMaterial: {fileID: 0}
     PlayerColor: {r: 0, g: 0, b: 0, a: 0}
     PlayerModel: {fileID: 0}
+    PlayerPortrait: {fileID: 0}
   UltimateForce: 0
   ultimateFormEnabled: 0
   modifierHandler: {fileID: 2604874277213559512}
-  data: {fileID: 11400000, guid: a4ebf7fb1fc09d143885cabdeca79625, type: 2}
+  data: {fileID: 11400000, guid: 691c352f7881b0840af2a066cc633a7a, type: 2}
   playerCollider: {fileID: 6620542154730230998}
   playerRenderer: {fileID: 8648371027433508735}
   forceField: {fileID: 7770940797116033232}

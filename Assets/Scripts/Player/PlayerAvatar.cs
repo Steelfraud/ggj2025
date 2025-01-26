@@ -36,8 +36,8 @@ namespace PlayerController
         public event PlayerAction OnDashEnd;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
-        private bool isGrounded; public bool IsGrounded { get { return isGrounded; }}
-        private float pushMultiplier = 1f; 
+        private bool isGrounded; public bool IsGrounded { get { return isGrounded; } }
+        private float pushMultiplier = 1f;
 
         /// <summary>
         /// This value gets increased after getting pushed
@@ -56,6 +56,7 @@ namespace PlayerController
         private float defaultDynamicFriction;
         private float canDashAtTime;
         private float canPushAtTime;
+        private float canCalculateVelocityAtTime;
 
         void OnValidate()
         {
@@ -87,7 +88,11 @@ namespace PlayerController
         void FixedUpdate()
         {
             GroundCast();
-            currentVelocity = playerRigidbody.linearVelocity;
+
+            if (Time.time >= canCalculateVelocityAtTime)
+            {
+                currentVelocity = playerRigidbody.linearVelocity;
+            }
         }
 
         void GroundCast()
@@ -101,12 +106,16 @@ namespace PlayerController
             if (collision.collider.gameObject.tag == "Player" && collision.collider.TryGetComponent(out PlayerAvatar playerAvatar))
             {
                 (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) = ResolvePlayerCollision(this, playerAvatar);
-
-                // If collision loser is null, it didn't have a dashing player
-                if (collisionLoser != null)
+                collisionLoser.canCalculateVelocityAtTime = Time.time + Time.fixedDeltaTime;
+                collisionWinner.canCalculateVelocityAtTime = Time.time + Time.fixedDeltaTime;
+ 
+                // Winner's velocities are freezed if dashed
+                if (collisionWinner.isDashing)
                 {
-                    collisionLoser.Push(collisionWinner.transform, pushForce, collisionWinner.isDashing ? data.AddedPushMultiplierOnDash.Evaluate(pushForce.magnitude) : data.AddedPushMultiplierOnMove.Evaluate(pushForce.magnitude));
+                    collisionWinner.Freeze();
                 }
+
+                collisionLoser.Push(collisionWinner.transform, pushForce, collisionWinner.isDashing ? data.AddedPushMultiplierOnDash.Evaluate(pushForce.magnitude) : data.AddedPushMultiplierOnMove.Evaluate(pushForce.magnitude));
             }
             if (ultimateFormEnabled && collision.collider.TryGetComponent(out Rigidbody hitBody))
             {
@@ -154,6 +163,7 @@ namespace PlayerController
             Debug.Log("Pushed: " + gameObject.GetInstanceID() + " | Final Force: " + (pushForce.magnitude * pushMultiplier).ToString("F2") + " | Just Multiplier: " + pushMultiplier.ToString("F2") + " | Frame: " + Time.frameCount);
             canPushAtTime = Time.time + data.PushedCooldown;
             playerRigidbody.AddForce(pushForce * pushMultiplier, ForceMode.VelocityChange);
+            playerRigidbody.AddForce(Vector3.down * pushForce.magnitude * data.pushDownForceMultiplier, ForceMode.VelocityChange);
             pushMultiplier += addedPushMultiplier;
             CancelDash();
 
