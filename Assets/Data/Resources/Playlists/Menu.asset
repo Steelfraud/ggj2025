@@ -17,6 +17,6 @@ MonoBehaviour:
   - artistName: 
     clipToPlay: {fileID: 8300000, guid: af8964baa1ac88b40b0b5383737a0f7e, type: 3}
     trackName: 
-    trackVolume: 0.4
+    trackVolume: 0.1
   shuffle: 0
   trackChangeTime: 0

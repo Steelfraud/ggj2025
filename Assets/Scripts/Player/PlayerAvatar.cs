@@ -133,6 +133,8 @@ namespace PlayerController
             {
                 if (avatarA.IsDashing)
                 {
+                    SoundEffectManager.instance.PlaySoundEffect("Announcer_GoodBobble");
+
                     return (avatarB, avatarA, (avatarB.transform.position - avatarA.transform.position).normalized * avatarA.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
                 }
                 else
@@ -144,6 +146,8 @@ namespace PlayerController
             {
                 if (avatarB.IsDashing)
                 {
+                    SoundEffectManager.instance.PlaySoundEffect("Announcer_NiceBobble");
+
                     return (avatarA, avatarB, (avatarA.transform.position - avatarB.transform.position).normalized * avatarB.currentVelocity.magnitude * avatarA.data.DashPushForceMultiplier);
                 }
                 else
