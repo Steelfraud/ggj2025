@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9888c265282c7d9458eb34da8d6d30d4, type: 3}
   m_Name: Rocket Pick Up
   m_EditorClassIdentifier: 
-  Active: 1
+  Active: 0
   PickupWeight: 1
   PickupPrefab: {fileID: 0}
   PooledPrefabData: {fileID: 11400000, guid: 5992cec6839491845966f9718c81a3df, type: 2}

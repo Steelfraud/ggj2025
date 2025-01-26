@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MySpawnPosition: {fileID: 0}
-  blastRadius: 5
+  blastRadius: 15
   particles: {fileID: 4060090235819499353, guid: 83f315bd39922b1449c5776641dce114, type: 3}
 --- !u!1 &4227478850939057988
 GameObject:

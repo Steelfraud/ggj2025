@@ -63,12 +63,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MovePushForceMultiplier: 1
-  DashPushForceMultiplier: 1
+  MovePushForceMultiplier: 0.8
+  DashPushForceMultiplier: 0.8
   pushDownForceMultiplier: 0.5
   PushedCooldown: 0.1
   MoveMaxAngularVelocity: 17
   DashMaxAngularVelocity: 60
+  RigidbodyDamping: 0.1
+  RigidbodyAngularDamping: 0.5
   MoveTorque: 5
   TurnTorqueAtTurnDot:
     serializedVersion: 2

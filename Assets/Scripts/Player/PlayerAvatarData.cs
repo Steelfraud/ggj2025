@@ -19,6 +19,8 @@ namespace PlayerController
         [Header("Limits")]
         [Min(0f)] public float MoveMaxAngularVelocity = 20f;
         [Min(0f)] public float DashMaxAngularVelocity = 100f;
+        [Min(0f)] public float RigidbodyDamping = 0f;
+        [Min(0f)] public float RigidbodyAngularDamping = 0.05f;
 
         [Header("Moving")]
         //public MovementType MovementType = MovementType.Torque;
