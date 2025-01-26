@@ -8,7 +8,10 @@ using UnityEngine.Windows;
 public class CharacterSelectUI : MonoBehaviour
 {
     public GameObject CharacterSelectParent;
+    public GameObject EmptySelect;
+    public List<GameObject> CharacterParents;
 
+    private List<GameObject> characters = new List<GameObject>();
     private List<CharacterUI> characterUIs = new List<CharacterUI>();
     
     private void OnEnable()
@@ -123,23 +126,42 @@ public class CharacterSelectUI : MonoBehaviour
             Destroy(ui.gameObject);
         }
 
+        foreach (GameObject charac in characters)
+        {
+            Destroy(charac);
+        }
+
         characterUIs.Clear();
+        characters.Clear();
 
         List<PlayerData> list = new List<PlayerData>(DataManager.Instance.activePlayers);
         list = list.OrderByDescending(x => x.PlayerIndex).ToList();
 
-        foreach (PlayerData data in list)
+        for (int i = 0; i < 4; i++)
         {
-            PlayerVisualInfo visuals = DataManager.Instance.GetCharacterVisuals(data.CharacterIndex);
-
-            CharacterUI ui = Instantiate(visuals.UIPrefab, CharacterSelectParent.transform).GetComponent<CharacterUI>();
-            characterUIs.Add(ui);
-            ui.PlayerLabel.text = "Player " + data.PlayerIndex;
-            ui.AttachedPlayer = data;
-
-            if (data.PlayerIndex == newPlayerIndex)
+            if (i < list.Count)
             {
-                ui.StartAnimation();
+                PlayerData data = list[i];
+                PlayerVisualInfo visuals = DataManager.Instance.GetCharacterVisuals(data.CharacterIndex);
+
+                CharacterUI ui = Instantiate(visuals.UIPrefab, CharacterSelectParent.transform).GetComponent<CharacterUI>();
+                characterUIs.Add(ui);
+                ui.PlayerLabel.text = "Player " + data.PlayerIndex;
+                ui.AttachedPlayer = data;
+
+                GameObject characterModel = Instantiate(visuals.PlayerModel, CharacterParents[i].transform);
+                characterModel.transform.localPosition = Vector3.zero;
+                characters.Add(characterModel);
+
+                if (data.PlayerIndex == newPlayerIndex)
+                {
+                    ui.StartAnimation();
+                }
+            }
+            else
+            {
+                CharacterUI ui = Instantiate(EmptySelect, CharacterSelectParent.transform).GetComponent<CharacterUI>();
+                characterUIs.Add(ui);
             }
         }
     }

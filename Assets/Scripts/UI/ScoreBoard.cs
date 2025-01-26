@@ -13,19 +13,12 @@ public class ScoreBoard : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        int playerCount = GameManager.Instance.joinedPlayers.Count;
-        List<PlayerVisualInfo> playerDataList = new List<PlayerVisualInfo>();
+        List<PlayerData> playerDataList = new List<PlayerData>(DataManager.Instance.activePlayers);
+        playerDataList = playerDataList.OrderByDescending(x => x.PlayerWins).ToList();
 
         scoreText.text = "Wins:\n";
 
-        for (int i = 1; i < playerCount+1; i++)
-        {
-            playerDataList.Add(DataManager.Instance.GetPlayerColor(i));
-        }
-
-        playerDataList.OrderByDescending(p => p.PlayerWins);
-
-        foreach (PlayerVisualInfo playerData in playerDataList)
+        foreach (PlayerData playerData in playerDataList)
         {
             scoreText.text += "Player " + playerData.PlayerIndex + ": " + playerData.PlayerWins + "\n";
         }

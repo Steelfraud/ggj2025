@@ -38,6 +38,7 @@ namespace PlayerController
         public UnityEvent OnDashRelease;
         public UnityEvent OnDashEnd;
         public UnityEvent WasPushed;
+        public UnityEvent OnDeath;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
         private bool isGrounded; public bool IsGrounded { get { return isGrounded; } }
@@ -72,6 +73,8 @@ namespace PlayerController
             defaultStaticFriction = playerCollider.material.staticFriction;
             defaultDynamicFriction = playerCollider.material.dynamicFriction;
             playerRigidbody.maxAngularVelocity = data.MoveMaxAngularVelocity;
+            playerRigidbody.linearDamping = data.RigidbodyDamping;
+            playerRigidbody.angularDamping = data.RigidbodyAngularDamping;
         }
 
         void OnDisable()
@@ -112,7 +115,7 @@ namespace PlayerController
                 (PlayerAvatar collisionLoser, PlayerAvatar collisionWinner, Vector3 pushForce) = ResolvePlayerCollision(this, playerAvatar);
                 collisionLoser.canCalculateVelocityAtTime = Time.time + Time.fixedDeltaTime;
                 collisionWinner.canCalculateVelocityAtTime = Time.time + Time.fixedDeltaTime;
- 
+
                 // Winner's velocities are freezed if dashed
                 if (collisionWinner.isDashing)
                 {
@@ -161,6 +164,11 @@ namespace PlayerController
         {
             playerRigidbody.linearVelocity = Vector3.zero;
             playerRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        public void Kill()
+        {
+            OnDeath.Invoke();
         }
 
         public void Push(Transform pusher, Vector3 pushForce, float addedPushMultiplier)
@@ -250,6 +258,7 @@ namespace PlayerController
             }
 
             playerRigidbody.angularVelocity = Vector3.zero;
+            isDashing = false;
         }
 
         public void TriggerUltimateForm(float durationSeconds, float force)
@@ -302,7 +311,12 @@ namespace PlayerController
             while (true)
             {
                 dashForce = data.DashForceAtChargeTime.Evaluate(timer) + modifierHandler.GetValueModifier(ModifiedValueNumber.DashForce);
-                playerRigidbody.AddForce(-playerRigidbody.linearVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
+
+                if (isGrounded)
+                {
+                    playerRigidbody.AddForce(-playerRigidbody.linearVelocity * data.DashBrakingAtChargeTime.Evaluate(timer));
+                }
+                
                 playerRigidbody.AddTorque(Vector3.Cross(Vector3.up, lastNonZeroMoveDirection.normalized) * dashForce, ForceMode.VelocityChange);
 
                 timer += Time.fixedDeltaTime;

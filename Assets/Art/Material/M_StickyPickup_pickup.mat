@@ -127,7 +127,7 @@ Material:
     - _BaseColor: {r: 0.109050214, g: 0.2924528, b: 0, a: 1}
     - _Color: {r: 0.10905019, g: 0.29245278, b: 0, a: 1}
     - _EmissionColor: {r: 0.026720779, g: 0.11439361, b: 0, a: 1}
-    - _FresnelColor: {r: 0.2117647, g: 0.8551342, b: 1, a: 1}
+    - _FresnelColor: {r: 1, g: 0.4198113, b: 0.46077624, a: 1}
     - _PatternScrollSpeed: {r: 0.05, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
