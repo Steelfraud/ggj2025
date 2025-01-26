@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 6620542154730230998}
   - component: {fileID: 2604874277213559512}
   - component: {fileID: 2330703008913933764}
+  - component: {fileID: 8592376593284116778}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -306,6 +307,7 @@ MonoBehaviour:
     PlayerColor: {r: 0, g: 0, b: 0, a: 0}
     PlayerModel: {fileID: 0}
     PlayerPortrait: {fileID: 0}
+    AudioID: 
   UltimateForce: 0
   ultimateFormEnabled: 0
   modifierHandler: {fileID: 2604874277213559512}
@@ -314,8 +316,57 @@ MonoBehaviour:
   playerRenderer: {fileID: 8648371027433508735}
   forceField: {fileID: 7770940797116033232}
   vfxHandler: {fileID: 2330703008913933764}
+  sfxHandler: {fileID: 8592376593284116778}
   modelParent: {fileID: 8512818931057412960}
   playerRigidbody: {fileID: 8230079864879737104}
+  OnDashStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8592376593284116778}
+        m_TargetAssemblyTypeName: PlayerSFXHandler, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Charge_Start
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDashRelease:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDashEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8592376593284116778}
+        m_TargetAssemblyTypeName: PlayerSFXHandler, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Charge_End
+          m_BoolArgument: 0
+        m_CallState: 2
+  WasPushed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8592376593284116778}
+        m_TargetAssemblyTypeName: PlayerSFXHandler, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Damage
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &698604017289277450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +459,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VFXParent: {fileID: 4254133760252704106}
+--- !u!114 &8592376593284116778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4226995857440471807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4524d55635444da4582e696f8a6b99a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAvatar: {fileID: 635585095850426401}
 --- !u!1 &5273971503933413576
 GameObject:
   m_ObjectHideFlags: 0

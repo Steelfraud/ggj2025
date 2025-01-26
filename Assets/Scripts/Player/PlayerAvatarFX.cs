@@ -26,9 +26,9 @@ namespace PlayerController
         {
             InitializeFX();
 
-            playerAvatar.OnDashStart += OnDashStart;
-            playerAvatar.OnDashRelease += OnDashRelease;
-            playerAvatar.OnDashEnd += OnDashEnd;
+            playerAvatar.OnDashStart.AddListener(OnDashStart);
+            playerAvatar.OnDashRelease.AddListener(OnDashRelease);
+            playerAvatar.OnDashEnd.AddListener(OnDashEnd);
             playerAvatar.OnPushed += OnPushed;
         }
 
@@ -39,9 +39,9 @@ namespace PlayerController
                 Destroy(fxBase.gameObject);
             }
 
-            playerAvatar.OnDashStart -= OnDashStart;
-            playerAvatar.OnDashRelease -= OnDashRelease;
-            playerAvatar.OnDashEnd -= OnDashEnd;
+            playerAvatar.OnDashStart.RemoveListener(OnDashStart);
+            playerAvatar.OnDashRelease.RemoveListener(OnDashRelease);
+            playerAvatar.OnDashEnd.RemoveListener(OnDashEnd);
             playerAvatar.OnPushed -= OnPushed;
         }
 

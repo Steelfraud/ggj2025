@@ -50,18 +50,22 @@ MonoBehaviour:
     PlayerColor: {r: 0.21389502, g: 0.19842473, b: 0.8584906, a: 1}
     PlayerModel: {fileID: 8385860222230125465, guid: 673562bddf5426e47bedebde1c38b639, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: c519167c391c32940b2e8b585e20c574, type: 3}
+    AudioID: Alex_
   - PlayerMaterial: {fileID: 2100000, guid: fc5f2926d963d6d49944a6eea553f74b, type: 2}
     PlayerColor: {r: 0.9622642, g: 0.39489147, b: 0.9038612, a: 1}
     PlayerModel: {fileID: 5875018485656519977, guid: a581c07cee1b1e54b9dc2b4af3242fd0, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 5baf56c21fcbf4e4d90e1c252f330e42, type: 3}
+    AudioID: Ash_
   - PlayerMaterial: {fileID: 2100000, guid: 86039e1e92a24fe48bdb00d841e491c9, type: 2}
     PlayerColor: {r: 0.8867924, g: 0.19529204, b: 0.18823427, a: 1}
     PlayerModel: {fileID: 1339782667642637655, guid: 00d26544d54b50b42b3c0f9fc5a48f4f, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 8e2699ad823b7414a84fd2e3c8540084, type: 3}
+    AudioID: Brody_
   - PlayerMaterial: {fileID: 2100000, guid: dd2678091f5772a4bba1a306e76ed9e4, type: 2}
     PlayerColor: {r: 0.39535922, g: 0.8207547, b: 0.127759, a: 1}
     PlayerModel: {fileID: 7710569486385852344, guid: 3192918aa9c95fd4eac6542a8ff03074, type: 3}
     PlayerPortrait: {fileID: 21300000, guid: 0184eddff8edf0146a99bf9c4d67a1eb, type: 3}
+    AudioID: Jess_
 --- !u!1 &1303779278913225956
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd82c4c40d55e94fbcd384087917e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicPlayer: {fileID: 0}
+  MusicPlayer: {fileID: 8338115167770714634}
   startingPlaylistIdentifier: 
 --- !u!114 &8338115167770714634
 MonoBehaviour:
@@ -235,7 +239,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

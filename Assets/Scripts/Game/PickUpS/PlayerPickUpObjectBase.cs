@@ -43,6 +43,7 @@ public class PlayerPickUpObjectBase : MonoBehaviour
             }
         }
 
+        player.PlayerSFXHandler.PlaySoundEffect("PickUp");
         Debug.Log("I was picked yaaaay :)))");
         DestroyPickup();
     }

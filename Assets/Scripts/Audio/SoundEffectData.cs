@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Sound Effect", menuName = "Soihtu/General/Sound effect", order = 1)]
 public class SoundEffectData : ScriptableObject
 {
+    public string clipIdentifier => name;
+
     public AudioClip clipToPlay;
-    public string clipIdentifier;
     [Range(0, 1f)]
     public float effectVolume = 1f;
 }

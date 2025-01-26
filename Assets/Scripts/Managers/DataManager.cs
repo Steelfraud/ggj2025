@@ -47,6 +47,7 @@ public class PlayerVisualInfo
     public Color PlayerColor;
     public GameObject PlayerModel;
     public Sprite PlayerPortrait;
+    public string AudioID;
     internal int PlayerIndex;
     internal int PlayerWins = 0;
 }

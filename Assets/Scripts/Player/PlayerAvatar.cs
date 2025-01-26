@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PlayerController
 {
@@ -10,6 +11,7 @@ namespace PlayerController
 
         public PlayerModifierHandler PlayerModifierHandler => modifierHandler;
         public PlayerVFXHandler PlayerVFXHandler => vfxHandler;
+        public PlayerSFXHandler PlayerSFXHandler => sfxHandler;
 
         [HideInInspector]
         public float UltimateForce;
@@ -22,6 +24,7 @@ namespace PlayerController
         [SerializeField] private MeshRenderer playerRenderer;
         [SerializeField] private ForceField forceField;
         [SerializeField] private PlayerVFXHandler vfxHandler;
+        [SerializeField] private PlayerSFXHandler sfxHandler;
         [SerializeField] private Transform modelParent;
 
         [HideInInspector, SerializeField] private Rigidbody playerRigidbody; public Rigidbody PlayerRigidbody { get { return playerRigidbody; } }
@@ -31,9 +34,10 @@ namespace PlayerController
         public event PlayerPushedAction OnPushed;
 
         public delegate void PlayerAction();
-        public event PlayerAction OnDashStart;
-        public event PlayerAction OnDashRelease;
-        public event PlayerAction OnDashEnd;
+        public UnityEvent OnDashStart;
+        public UnityEvent OnDashRelease;
+        public UnityEvent OnDashEnd;
+        public UnityEvent WasPushed;
 
         private bool isDashing; public bool IsDashing { get { return isDashing; } }
         private bool isGrounded; public bool IsGrounded { get { return isGrounded; } }
@@ -169,6 +173,7 @@ namespace PlayerController
 
             OnPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
             OnAnyPlayerPushed?.Invoke(this.transform, pusher, pushForce * pushMultiplier);
+            this.WasPushed?.Invoke();
         }
 
         public void SetPlayerColor(PlayerVisualInfo color)

@@ -50,7 +50,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (gameOngoing)
+        if (gameOngoing && this.activePlayers.Count > 0)
         {
             gameTimer += Time.deltaTime;
             timeTillNextPickup -= Time.deltaTime;
@@ -86,6 +86,7 @@ public class GameManager : Singleton<GameManager>
 
     public void KillPlayer(PlayerAvatar player)
     {
+        player.PlayerSFXHandler.PlaySoundEffect("Death");
         activePlayers.Remove(player);
         player.gameObject.SetActive(false);
         CustomCamera.Instance.RemoveFromTargetGroup(player.transform);
@@ -102,6 +103,8 @@ public class GameManager : Singleton<GameManager>
         gameOngoing = true;
         gameTimer = 0;
         UI.ToggleGameEndPanel(false);
+
+        MusicPlaylistManager.Instance.ChangePlaylist("Game");
 
         if (TimeBeforeFirstPickUp > 0)
         {
@@ -224,6 +227,7 @@ public class GameManager : Singleton<GameManager>
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
 
         UI.AddNewPlayerUI("Player " + colorToSet.PlayerIndex, newPlayer.SpawnedAvatar, colorToSet.PlayerPortrait);
+        newPlayer.SpawnedAvatar.PlayerSFXHandler.PlaySoundEffect("Select");
     }
 
     public void RestartLevel()
