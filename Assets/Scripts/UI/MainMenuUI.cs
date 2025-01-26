@@ -14,6 +14,7 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         MusicPlaylistManager.Instance.ChangePlaylist("Menu");
+        DataManager.Instance.playerColors.Clear();
     }
 
     public void StartGame()

@@ -8,21 +8,26 @@ public class PlayerMenuInputController : MonoBehaviour
 
     internal PlayerData PlayerData;
 
+    private float startTime = 0;
     private CharacterSelectUI characterSelectUI;
-
-    private void Start()
-    {
-        characterSelectUI = FindFirstObjectByType<CharacterSelectUI>();
-    }
 
     public void SetupController(PlayerData myData, CharacterSelectUI selectUI)
     {
         characterSelectUI = selectUI;
         PlayerData = myData;
+        startTime = Time.timeSinceLevelLoad;
     }
 
     void OnMove(InputValue inputValue)
     {
+        if (Time.timeSinceLevelLoad - startTime <= 0.25f)
+            return;
+
+        if (DataManager.Instance.HasSelectedCharacter(PlayerData.DeviceID))
+        {
+            return;
+        }
+        
         Vector2 inputVector = inputValue.Get<Vector2>();
 
         if (inputVector.x > 0.5f)
@@ -40,6 +45,9 @@ public class PlayerMenuInputController : MonoBehaviour
     void OnAccept(InputValue inputValue)
     {
         if (inputValue.isPressed == false)
+            return;
+
+        if (Time.timeSinceLevelLoad - startTime <= 0.25f)
             return;
 
         float inputPressed = inputValue.Get<float>();
@@ -62,6 +70,9 @@ public class PlayerMenuInputController : MonoBehaviour
     void OnCancel(InputValue inputValue)
     {
         if (inputValue.isPressed == false)
+            return;
+
+        if (Time.timeSinceLevelLoad - startTime <= 0.25f)
             return;
 
         float inputPressed = inputValue.Get<float>();

@@ -22,7 +22,7 @@ public class CharacterSelectUI : MonoBehaviour
         PlayerData newData = DataManager.Instance.AddNewPlayer(input.devices[0].deviceId);
         input.gameObject.GetComponent<PlayerMenuInputController>().SetupController(newData, this);
 
-        DrawCharacterSelects();
+        DrawCharacterSelects(newData.PlayerIndex);
     }
 
     public void PlayerLeft(PlayerInput input)
@@ -71,7 +71,7 @@ public class CharacterSelectUI : MonoBehaviour
         }
 
         player.CharacterIndex = currentIndex;
-        DrawCharacterSelects();
+        DrawCharacterSelects(player.PlayerIndex);
     }
 
     public void PreviousCharacter(PlayerData player)
@@ -98,20 +98,25 @@ public class CharacterSelectUI : MonoBehaviour
         }
 
         player.CharacterIndex = currentIndex;
-        DrawCharacterSelects();
+        DrawCharacterSelects(player.PlayerIndex);
     }
 
     public void SelectCharacter(PlayerData player)
     {
         DataManager.Instance.SelectCharacter(player.DeviceID, player.CharacterIndex);
+        SoundEffectManager.instance.PlaySoundEffect("Lock_In");
+        CharacterUI ui = characterUIs.Find(x => x.AttachedPlayer == player);
+        ui.LockAnimation();
     }
 
     public void CancelCharacter(PlayerData player)
     {
         DataManager.Instance.UnSelectCharacter(player.DeviceID);
+        CharacterUI ui = characterUIs.Find(x => x.AttachedPlayer == player);
+        ui.UnLockAnimation();
     }
 
-    public void DrawCharacterSelects()
+    public void DrawCharacterSelects(int newPlayerIndex = -1)
     {
         foreach (CharacterUI ui in characterUIs)
         {
@@ -130,6 +135,12 @@ public class CharacterSelectUI : MonoBehaviour
             CharacterUI ui = Instantiate(visuals.UIPrefab, CharacterSelectParent.transform).GetComponent<CharacterUI>();
             characterUIs.Add(ui);
             ui.PlayerLabel.text = "Player " + data.PlayerIndex;
+            ui.AttachedPlayer = data;
+
+            if (data.PlayerIndex == newPlayerIndex)
+            {
+                ui.StartAnimation();
+            }
         }
     }
 
