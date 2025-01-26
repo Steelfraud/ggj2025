@@ -134,6 +134,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerLabel: {fileID: 5541340937483662462}
+  Animator: {fileID: 2635716075185785610}
+--- !u!95 &2635716075185785610 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6674136133046450287, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}
+  m_PrefabInstance: {fileID: 8650494309325960037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5541340937483662462 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3812990347469014811, guid: bde7976343dcbb146bc6a2af48424c26, type: 3}

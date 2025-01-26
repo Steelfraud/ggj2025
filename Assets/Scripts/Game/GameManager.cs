@@ -51,6 +51,11 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (gameOngoing && this.activePlayers.Count > 0)
         {
             gameTimer += Time.deltaTime;
@@ -125,6 +130,11 @@ public class GameManager : Singleton<GameManager>
 
         highestPlayerCount = 0;
         //int playerIndex = 0;
+
+        foreach (PlayerData data in DataManager.Instance.activePlayers)
+        {            
+            PlayerInputManager.JoinPlayer(data.PlayerIndex, pairWithDevice: InputSystem.devices.First(x => x.deviceId == data.DeviceID));
+        }
 
         //foreach (InputDevice device in InputSystem.devices) 
         //{

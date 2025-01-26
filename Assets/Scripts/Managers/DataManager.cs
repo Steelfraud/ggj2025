@@ -7,8 +7,7 @@ public class DataManager : Singleton<DataManager>
     public List<PlayerVisualInfo> AvailableColors;
 
     public List<PlayerData> activePlayers = new List<PlayerData>();
-
-    private Dictionary<int, PlayerVisualInfo> playerColors = new Dictionary<int, PlayerVisualInfo>();
+    public Dictionary<int, PlayerVisualInfo> playerColors = new Dictionary<int, PlayerVisualInfo>();
 
     private void Awake()
     {
@@ -36,7 +35,12 @@ public class DataManager : Singleton<DataManager>
 
     public PlayerData AddNewPlayer(int deviceID)
     {
-        PlayerData playerData = new PlayerData() { DeviceID = deviceID, PlayerIndex = activePlayers.Count + 1 };
+        PlayerData playerData = activePlayers.Find(x => x.DeviceID == deviceID);
+
+        if (playerData != null)
+            return playerData;
+
+        playerData = new PlayerData() { DeviceID = deviceID, PlayerIndex = activePlayers.Count + 1 };
         activePlayers.Add(playerData);
 
         List<int> ints = GetAvailableCharacterIndexes();
