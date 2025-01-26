@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
     public GameObject CreditsParent;
     public GameObject CharacterSelect;
+    public GameObject FirstElement;
 
     private void Awake()
     {
@@ -16,6 +18,11 @@ public class MainMenuUI : MonoBehaviour
         MusicPlaylistManager.Instance.ChangePlaylist("Menu");
         DataManager.Instance.playerColors.Clear();
         Invoke("playIntroSound", 1f);
+
+        if (this.FirstElement != null && gameObject.activeInHierarchy && EventSystem.current != null && EventSystem.current.currentSelectedGameObject != this.FirstElement)
+        {
+            EventSystem.current.SetSelectedGameObject(this.FirstElement);
+        }
     }
 
     void playIntroSound()
