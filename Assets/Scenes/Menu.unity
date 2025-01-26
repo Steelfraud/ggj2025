@@ -339,8 +339,8 @@ Transform:
   m_GameObject: {fileID: 767494303}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -38.3, y: 15.6, z: -233.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -38.5, y: 17, z: -233.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1416047794}
@@ -666,8 +666,8 @@ Transform:
   m_GameObject: {fileID: 1139361319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -44.3, y: 15.6, z: -233.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -44, y: 17, z: -233.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1109065433}
@@ -814,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2908081480369782053, guid: 2ced3972d22a72a41be7912388f96e50, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3021865693287685575, guid: 2ced3972d22a72a41be7912388f96e50, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1102,8 +1102,8 @@ Transform:
   m_GameObject: {fileID: 1408459772}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -57.2, y: 15.6, z: -233.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -55, y: 17, z: -233.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1437163986}
@@ -1266,8 +1266,8 @@ Transform:
   m_GameObject: {fileID: 1565528162}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -51, y: 15.6, z: -233.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -50, y: 17, z: -233.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1982006125}
@@ -1433,7 +1433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4792166492345819047, guid: 8be714ffc07d0a34587409d893ac717e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6088573790270674586, guid: 8be714ffc07d0a34587409d893ac717e, type: 3}
       propertyPath: CharacterSelect
