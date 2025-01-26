@@ -9,7 +9,9 @@ public class CharacterSelectUI : MonoBehaviour
 {
     public GameObject CharacterSelectParent;
     public GameObject EmptySelect;
+    public List<GameObject> CharacterParents;
 
+    private List<GameObject> characters = new List<GameObject>();
     private List<CharacterUI> characterUIs = new List<CharacterUI>();
     
     private void OnEnable()
@@ -124,7 +126,13 @@ public class CharacterSelectUI : MonoBehaviour
             Destroy(ui.gameObject);
         }
 
+        foreach (GameObject charac in characters)
+        {
+            Destroy(charac);
+        }
+
         characterUIs.Clear();
+        characters.Clear();
 
         List<PlayerData> list = new List<PlayerData>(DataManager.Instance.activePlayers);
         list = list.OrderByDescending(x => x.PlayerIndex).ToList();
@@ -140,6 +148,10 @@ public class CharacterSelectUI : MonoBehaviour
                 characterUIs.Add(ui);
                 ui.PlayerLabel.text = "Player " + data.PlayerIndex;
                 ui.AttachedPlayer = data;
+
+                GameObject characterModel = Instantiate(visuals.PlayerModel, CharacterParents[i].transform);
+                characterModel.transform.localPosition = Vector3.zero;
+                characters.Add(characterModel);
 
                 if (data.PlayerIndex == newPlayerIndex)
                 {
