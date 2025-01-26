@@ -14,7 +14,7 @@ public class MusicPlaylistManager : MonoBehaviour
     private Dictionary<string, MusicPlaylistData> playlistDictionary;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
         if (Instance == null)
         {
