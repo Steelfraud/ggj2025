@@ -82,6 +82,11 @@ public class DataManager : Singleton<DataManager>
         return AvailableColors.IndexOf(character);
     }
 
+    public PlayerData GetPlayer(PlayerVisualInfo character)
+    {
+        return activePlayers.Find(x => x.CharacterIndex == AvailableColors.IndexOf(character));
+    }
+
     public bool HasSelectedCharacter(int controllerID)
     {
         return playerColors.ContainsKey(controllerID);
@@ -121,7 +126,6 @@ public class DataManager : Singleton<DataManager>
 
         colorToSet = availableColors.GetRandomElementFromList();
         playerColors.Add(controllerID, colorToSet);
-        colorToSet.PlayerIndex = playerColors.Count;
 
         return colorToSet;
     }
@@ -146,8 +150,4 @@ public class PlayerVisualInfo
     public Sprite PlayerPortrait;
     public string AudioID;
     public GameObject UIPrefab;
-    internal int PlayerIndex;
-    internal int DeviceID;
-    internal int PlayerWins = 0;
-    internal int CharacterIndex;
 }
