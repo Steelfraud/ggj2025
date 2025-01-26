@@ -106,6 +106,7 @@ public class GameManager : Singleton<GameManager>
         UI.ToggleGameEndPanel(false);
 
         MusicPlaylistManager.Instance.ChangePlaylist("Game");
+        SoundEffectManager.instance.PlaySoundEffect("Announcer_BobbleOn");
 
         if (TimeBeforeFirstPickUp > 0)
         {
