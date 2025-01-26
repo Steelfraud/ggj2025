@@ -861,12 +861,67 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1454292392049651327, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2134254127281075691, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313601192366748788, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3833213643970199386, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445264011889267108, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5838440601005769520, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6596099821076883957, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
       propertyPath: m_Name
       value: 48htuotos
       objectReference: {fileID: 0}
+    - target: {fileID: 7217312536565500447, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8168571568272730949, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219043903158854083, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_SceneBindings.Array.data[0].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219043903158854083, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219043903158854083, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_SceneBindings.Array.data[2].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219043903158854083, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2134254127281075691, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 1454292392049651327, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 5838440601005769520, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 7217312536565500447, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 4445264011889267108, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 3833213643970199386, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
+    - {fileID: 2313601192366748788, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ce276b4f59e4d74d9b6eb25b09f852d, type: 3}

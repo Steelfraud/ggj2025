@@ -21,10 +21,10 @@ public class GameUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (PlayerPanel panel in AvailablePlayerPanels)
-        {
-            panel.gameObject.SetActive(false);
-        }
+        //foreach (PlayerPanel panel in AvailablePlayerPanels)
+        //{
+        //    panel.gameObject.SetActive(false);
+        //}
     }
 
     // Update is called once per frame
