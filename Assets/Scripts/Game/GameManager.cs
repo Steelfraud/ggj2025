@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Game Settings")]
     public bool StartGameOnStart = true;
+    public bool AutomaticRestart = true;
     public AnimationCurve PickUpTimerCurve;
     public float TimeBeforeFirstPickUp = 0f;
     public float PickupMinimumTime = 1f;
@@ -165,7 +166,8 @@ public class GameManager : Singleton<GameManager>
             Spawner.enabled = false;
         }
 
-        Invoke(nameof(RestartLevel), 4);
+        if (AutomaticRestart)
+            Invoke(nameof(RestartLevel), 4);
     }
 
     private void CreatePickUp()
