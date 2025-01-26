@@ -60,12 +60,13 @@ public class CustomCamera : Singleton<CustomCamera>
         worldCenterObject = new GameObject();
         worldCenterObject.transform.parent = transform;
         AddToTargetGroup(worldCenterObject.transform, worldCenterWeight);
-        PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed += OnPlayerPush;
     }
 
     public void OnDestroy()
     {
-        PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush; 
+        PlayerAvatar.OnAnyPlayerPushed -= OnPlayerPush;
+        Time.timeScale = 1f;
     }
 
     private void OnPlayerPush(Transform pushed, Transform pusher, Vector3 pushForce)
