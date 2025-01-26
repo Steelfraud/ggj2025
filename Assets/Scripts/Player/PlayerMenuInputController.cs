@@ -33,12 +33,12 @@ public class PlayerMenuInputController : MonoBehaviour
         if (inputVector.x > 0.5f)
         {
             characterSelectUI.NextCharacter(PlayerData);
-            Debug.Log("next");
+            //Debug.Log("next");
         }
         else if (inputVector.x < -0.5f)
         {
             characterSelectUI.PreviousCharacter(PlayerData);
-            Debug.Log("previous");
+            //Debug.Log("previous");
         }
     }
 
@@ -52,17 +52,17 @@ public class PlayerMenuInputController : MonoBehaviour
 
         float inputPressed = inputValue.Get<float>();
 
-        Debug.Log("accept");
+        //Debug.Log("accept");
 
         if (DataManager.Instance.HasSelectedCharacter(PlayerData.DeviceID) == false)
         {
             characterSelectUI.SelectCharacter(PlayerData);
-            Debug.Log("lock in");
+            //Debug.Log("lock in");
         }
         else
         {
             characterSelectUI.TryToStartGame();
-            Debug.Log("try start");
+            //Debug.Log("try start");
         }
     }
 
@@ -77,18 +77,18 @@ public class PlayerMenuInputController : MonoBehaviour
 
         float inputPressed = inputValue.Get<float>();
 
-        Debug.Log("cancel");
+        //Debug.Log("cancel");
 
         if (DataManager.Instance.HasSelectedCharacter(PlayerData.DeviceID))
         {
             characterSelectUI.CancelCharacter(PlayerData);
-            Debug.Log("unlock in");
+            //Debug.Log("unlock in");
         }
         else
         {
             characterSelectUI.RemovePlayer(PlayerData.DeviceID);
             Destroy(gameObject);
-            Debug.Log("im out");
+            //Debug.Log("im out");
         }        
     }
 
