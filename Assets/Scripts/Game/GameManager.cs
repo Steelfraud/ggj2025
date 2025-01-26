@@ -239,6 +239,11 @@ public class GameManager : Singleton<GameManager>
         PlayerVisualInfo colorToSet = DataManager.Instance.GetPlayerColor(input.devices[0].deviceId);
         PlayerData player = DataManager.Instance.GetPlayer(colorToSet);
 
+        if (player == null)
+        {
+            player = DataManager.Instance.AddNewPlayer(input.devices[0].deviceId);
+        }
+
         activePlayers.Add(newPlayer.SpawnPlayerAvatar(spawnPos.transform.position, colorToSet));
         CustomCamera.Instance.AddToTargetGroup(newPlayer.SpawnedAvatar.transform);
 
