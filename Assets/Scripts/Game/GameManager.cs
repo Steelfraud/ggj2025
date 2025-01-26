@@ -237,4 +237,5 @@ public class GameManager : Singleton<GameManager>
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
+
 }
