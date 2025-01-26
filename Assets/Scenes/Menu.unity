@@ -1435,6 +1435,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5818219447461269490, guid: 8be714ffc07d0a34587409d893ac717e, type: 3}
+      propertyPath: m_text
+      value: "Bobbleheads\n\nSakari Ekqivst - programming\nSami Laukkanen - programming\nOskari
+        Rautala - programming\nMikko \xD6sterman - programming\nJami Aho - art\nAntta
+        Kilpel\xE4inen -art\nAntti Lindsten - art\nJuuso Salminen - art"
+      objectReference: {fileID: 0}
     - target: {fileID: 6088573790270674586, guid: 8be714ffc07d0a34587409d893ac717e, type: 3}
       propertyPath: CharacterSelect
       value: 
